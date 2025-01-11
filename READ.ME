@@ -1,0 +1,39 @@
+## Aim of the lab
+In this lab we will create a simple reddit server, using express and EJS.
+For the moment we will be using data from a given JSON file instead of a database.
+
+### Create and setup a new node project
+- In the project folder write at the terminal `npm init -y` to start a new node project.
+- Install express by writing at the terminal `npm instal express`.
+- Install nodemon globally by writing at the terminal `npm instal -g nodemon`.
+- Edit the `package.json` file to add the script `"start": "nodemon index.js"`.
+- Create a new `index.js` file
+- Create a new subfolder `views` to hold our ejs files.
+
+### Edit the `index.js` file
+- Require `express` and create and app
+- Require `path`, and the redditData from the given `data.jason` file
+- Set the `view engine` to `ejs` as we saw in class
+- Create a route to the home path (`'/'`) that sends a response and test it.
+
+### Create a template for the home
+- Create a new `home.ejs` file at the `views` subfolder and edit it to display a welcome message.
+- Edit the route to the home path in the `index.js` to render the `home.ejs` file and test it.
+- Edit the route to the home path in the `index.js` to get the names of the subreddits from the give JSON file and pass it as a parameter to the `home.ejs` when rendering it.
+- **Hint:** you may use `Object.keys()` function to extract the names from the JSON file 
+- Using EJS, edit the `home.ejs` file to print an unordered list with the names using the passed parameter
+
+### Create a template for the subreddit
+- Create a route to the a reddit path (`'/r/:subreddit'`) that sends a response and test it using `res.send`. Your response should get the subreddit name from the request parameters and display it at the response.
+- Create a new `subreddit.ejs` file at the `views` subfolder. This should accept the **subreddit object** from the route (using a `res.render` in place of the `res.send`) and display the `name`, `description` and total `subscribers`. Test it.
+- Edit the `subreddit.ejs` file to create a new `<article>` element for each post in the subreddit and display the `author` and the `title` of each post. Test it.
+- Edit the `subreddit.ejs` file to display an image if the post has one. Test it.
+- At the top add a link to take you back to the home page.
+
+### Edit the home page
+- Edit the  `home.ejs` file to make the list of the reddit names link to the subreddits.
+- Test the website.
+
+### Extra part
+- Create a new `404.ejs` file that displays an error message if the that specifies that a specific subreddit was not found.
+- Edit the reddit path to render the `404.ejs` if the path to a reddit was not found
