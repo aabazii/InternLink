@@ -4,16 +4,20 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=\, initial-scale=1.0" />
-    <title>My reddit</title>
+    <title>InternLink</title>
 </head>
+<%- include('partials/navbar') %>
 
 <body>
-  <h1>Welcome to my page</h1>
-  <ul>
-    <% for (let name of subredditNames) { %>
-      <li><a href="/r/<%= name %>"><%= name %></a></li>
-    <% } %>
-    </ul>
+  <%- include('partials/carouselhome')  %>
+  <%- include('partials/searchhome')  %>
+  <%- include('partials/categoryhome')  %>
+  <%- include('partials/abouthome')  %>
+  <%- include('partials/intershiplist') %>
+  
+ 
 </body>
+
+<%- include('partials/footer') %>
 
 </html>
