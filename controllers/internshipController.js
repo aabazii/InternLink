@@ -55,9 +55,11 @@ class InternshipController {
     }
   }
 
-  async getAllInternships(req, res) {
+  async getAllInternships(_, res) {
     try {
+      console.log("Fetching all internships...");
       const internships = await Internship.find();
+      console.log("Internships found:", internships);
       res.status(200).json(internships);
     } catch (err) {
       res.status(500).json({ error: err.message });

@@ -3,6 +3,11 @@ const internshipController = require("../controllers/internshipController");
 
 const router = express.Router();
 
+// Render the form to add a new internship
+router.get("/add", (req, res) => {
+  res.render("addInternship");
+});
+
 // Create a new internship
 router.post("/", (req, res) => internshipController.createInternship(req, res));
 
@@ -19,4 +24,3 @@ router.put("/:id", (req, res) => internshipController.updateInternship(req, res)
 router.delete("/:id", (req, res) => internshipController.deleteInternship(req, res));
 
 module.exports = router;
-

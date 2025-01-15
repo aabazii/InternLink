@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Internship</title>
+  <link rel="stylesheet" href="/path/to/your/css/styles.css">
+</head>
+<body>
+  <h1>Add a New Internship</h1>
+  <form action="/internships" method="POST">
+    <div>
+      <label for="name">Title:</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    <div>
+      <label for="internType">Company:</label>
+      <input type="text" id="internType" name="internType" required>
+    </div>
+    <div>
+      <label for="details">Description:</label>
+      <textarea id="details" name="details" required></textarea>
+    </div>
+    <div>
+      <label for="payment">Payment:</label>
+      <input type="text" id="payment" name="payment" required>
+    </div>
+    <div>
+      <label for="deadline">Deadline:</label>
+      <input type="date" id="deadline" name="deadline" required>
+    </div>
+    <div>
+      <label for="location">Location:</label>
+      <input type="text" id="location" name="location" required>
+    </div>
+    <button type="submit">Add Internship</button>
+  </form>
+</body>
+</html>
