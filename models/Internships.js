@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const internshipSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -6,8 +6,8 @@ const internshipSchema = new mongoose.Schema({
   internType: { type: String, required: true },
   payment: { type: String, required: true },
   deadline: { type: Date, required: true },
-  location: { type: String, required: true }
+  location: { type: String, required: true },
 });
 
-const Internships = mongoose.model('Internship', internshipSchema);
+const Internships = mongoose.model("Internship", internshipSchema);
 module.exports = Internships;
