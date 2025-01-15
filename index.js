@@ -1,47 +1,27 @@
 const express = require("express");
-const path = require("path");
-const redditData = require("./data.json");
-const port = 8080;
-const app = express();
 const mongoose = require("mongoose");
-const InternshipRouter = require('./routers/InternshipRouter');
+const userRoutes = require("./routes/userRoutes");
+const internshipRoutes = require("./routes/internshipRoutes");
 
-// Middleware to parse JSON requests
-//app.use(express.json());
+const app = express();
 
-app.set("view engine", "ejs");
+// Middleware
+app.use(express.json());
 
-// Connect to MongoDB (Note: We'll set up MongoDB later)
-const dbURI = "mongodb://localhost:27017/interships";
-mongoose.connect(dbURI, {
+// Database connection
+mongoose.connect("mongodb://localhost:27017/interships", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-.then(() => {
-  console.log('Connected to MongoDB');
-})
-.catch((error) => {
-  console.error('Error connecting to MongoDB:', error);
-});
-app.get("/", (req, res) => {
-  const subredditNames = Object.keys(redditData);
-  console.log(subredditNames);
-  res.render("home", { subredditNames });
-});
+.then(() => console.log("MongoDB connected"))
+.catch(err => console.error("MongoDB connection error:", err));
 
-app.use('/internships',InternshipRouter);
+// Routes
+app.use("/users", userRoutes);
+app.use("/internships", internshipRoutes);
 
-app.get("/r/:subreddit", (req, res) => {
-  const { subreddit } = req.params;
-  const data = redditData[subreddit];
-  //res.render("subreddit", { ...data });
-  if (data) {
-    res.render("subreddit", { ...data });
-  } else {
-    res.send("<h1>404</h1>");
-  }
-});
-
-app.listen(port, () => {
-  console.log(`Server is running on port: ` + port);
+// Start the server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });

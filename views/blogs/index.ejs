@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head.ejs') %>
+  <body>
+    <%- include('../partials/nav.ejs') %>
+
+    <div class="blogs content">
+      <div class="info">
+        <p>
+          🇩🇪 Hallo Blogger,<br />nach der Registrierung und Anmeldung könnt ihr
+          eure Textbeiträge hinzufügen, die dann auf der Startseite
+          erscheinen.<br />Ihr könnt auch die Beiträge anderer lesen und eure
+          eigenen löschen.
+        </p>
+        <p>
+          🇬🇧 Hello bloggers,<br />
+          after registering and logging in, you can add your text posts to
+          appear on the home page.<br />
+          You can read other's posts as well, and you can delete your own.
+        </p>
+      </div>
+      <h2>All Blogs</h2>
+      <% if(blogs.length > 0){ %> <% blogs.forEach(blog => { %>
+      <a class="single" href="/blogs/<%= blog._id %>">
+        <h3 class="title"><%= blog.title %></h3>
+        <p class="snippet"><%= blog.snippet %></p>
+      </a>
+      <% }) %> <% } else { %>
+      <p>No Blogs to display yet!</p>
+      <% } %>
+    </div>
+
+    <%- include('../partials/footer.ejs') %>
+  </body>
+</html>
