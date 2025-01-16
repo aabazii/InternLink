@@ -1,6 +1,6 @@
+const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const { isEmail } = require("validator");
-const bcrypt = require("bcrypt");
 
 const Schema = mongoose.Schema;
 
@@ -23,7 +23,7 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: [true, "Please enter a password."],
-    minlength: [6, "Minimun password length is 6 characters."],
+    minlength: [6, "Minimum password length is 6 characters."],
   },
   phoneNumber: {
     type: String,
@@ -35,7 +35,6 @@ const userSchema = new Schema({
       message: (props) => `${props.value} is not a valid phone number!`,
     },
   },
-
   collegeName: {
     type: String,
     required: [true, "Please enter your college name."],
@@ -43,7 +42,7 @@ const userSchema = new Schema({
   dateOfBirth: {
     type: Date,
     required: [true, "Please enter your date of birth."],
-  }
+  },
 });
 
 // fire a function before DOC saved to DB

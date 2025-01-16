@@ -1,4 +1,4 @@
-// const User = require('../models/Users');
+// const User = require('../models/User');
 
 // // Create a new user
 // const createUser = async (req, res) => {
@@ -70,7 +70,7 @@
 //   UserController
 // };
 
-// filepath: controllers/userController.js
+// // filepath: controllers/userController.js
 const User = require("../models/User");
 
 class UserController {
