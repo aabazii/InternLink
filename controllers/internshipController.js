@@ -45,6 +45,7 @@
 const Internship = require("../models/Internship");
 
 class InternshipController {
+
   async createInternship(req, res) {
     try {
       const internship = new Internship(req.body);
