@@ -58,12 +58,20 @@ class InternshipController {
 
   async getAllInternships(_, res) {
     try {
-      console.log("Fetching all internships...");
-      const internships = await Internship.find();
-      console.log("Internships found:", internships);
-      res.status(200).json(internships);
+      const page = parseInt(req.query.page) || 1;
+      const limit = 7;
+      const skip = (page - 1) * limit;
+
+      const internships = await Internship.find().skip(skip).limit(limit);
+      const totalInternships = await Internship.countDocuments();
+
+      res.render("index", {
+        internships,
+        currentPage: page,
+        totalPages: Math.ceil(totalInternships / limit),
+      });
     } catch (err) {
-      res.status(500).json({ error: err.message });
+      res.status(500).json({ message: err.message });
     }
   }
 

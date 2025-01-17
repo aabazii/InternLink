@@ -42,8 +42,8 @@
                         </h1>
                         <div class="custom-breadcrumbs"> <a href="#">Home</a>
                             <span class="mx-2 slash">/</span> <span
-                                class="text-white"><strong>Log
-                                    In</strong></span>
+                                class="text-white"><strong> Register
+                                </strong></span>
                         </div>
                     </div>
                 </div>
@@ -70,6 +70,24 @@
                             <div class="tab-pane fade show active"
                                 id="pills-user" role="tabpanel"
                                 aria-labelledby="pills-user-tab">
+                                <% if (success) { %>
+                                <div class="alert alert-success">
+                                    <%= success %>
+                                </div>
+
+
+
+                                
+                                <% } %>
+                                <% if (error) { %>
+                                <div class="alert alert-danger">
+                                    <%= error %>
+                                </div>
+
+
+
+                                
+                                <% } %>
                                 <form action="/register/user" method="post">
                                     <div class="form-group">
                                         <label for="firstName">First
@@ -120,12 +138,28 @@
                                         class="btn btn-primary btn-block">Register</button>
                                 </form>
                                 <div class="mt-4 text-center">
-                                    <p>Already a user? <a href="/login">Log in here</a></p>
-                            </div>
+                                    <p>Already a user? <a href="/login">Log in
+                                            here</a></p>
+                                </div>
                             </div>
                             <div class="tab-pane fade" id="pills-company"
                                 role="tabpanel"
                                 aria-labelledby="pills-company-tab">
+                                
+                                <% if (success) { %>
+                                <div class="alert alert-success">
+                                    <%= success %>
+                                </div>
+
+                                
+                                <% } %>
+                                <% if (error) { %>
+                                <div class="alert alert-danger">
+                                    <%= error %>
+                                </div>
+
+                                
+                                <% } %>
                                 <form action="/register/company" method="post">
                                     <div class="form-group">
                                         <label for="companyName">Company
@@ -155,12 +189,13 @@
                                         class="btn btn-primary btn-block">Register</button>
                                 </form>
                                 <div class="mt-4 text-center">
-                                    <p>Already a user? <a href="/login">Log in here</a></p>
+                                    <p>Already a user? <a href="/login">Log in
+                                            here</a></p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
     </div>
     </section>

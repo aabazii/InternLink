@@ -3,43 +3,80 @@ const Company = require("../models/Company");
 const bcrypt = require("bcryptjs");
 
 class AuthController {
-//   async registerUser(req, res) {
-//     const { firstName, lastName, email, password, phoneNumber, collegeName, dateOfBirth } = req.body;
+    async registerUser(req, res) {
+      const { firstName, lastName, email, password, phoneNumber, collegeName, dateOfBirth } = req.body;
 
-//     try {
-//       const userExists = await User.findOne({ email });
+      try {
+        const userExists = await User.findOne({ email });
 
-//       if (userExists) {
-//         req.flash("error", "User already exists with this email");
-//         return res.redirect("/register");
-//       }
+        if (userExists) {
+          req.flash("error", "User already exists with this email");
+          return res.redirect("/register");
+        }
 
-//       const user = new User({
-//         firstName,
-//         lastName,
-//         email,
-//         password,
-//         phoneNumber,
-//         collegeName,
-//         dateOfBirth,
-//       });
+        const user = new User({
+          firstName,
+          lastName,
+          email,
+          password,
+          phoneNumber,
+          collegeName,
+          dateOfBirth,
+        });
 
-//       await user.save();
-//       req.flash("success", "User registered successfully");
-//       res.redirect("/login");
-//     } catch (error) {
-//       req.flash("error", error.message);
-//       res.redirect("/register");
-//     }
-//   }
+        await user.save();
+        req.flash("success", "User registered successfully");
+        res.redirect("/login");
+      } catch (error) {
+        req.flash("error", error.message);
+        res.redirect("/register");
+      }
+    }
 
-async createUser(req, res) {
+  //async createUser(req, res) {
+  //     try {
+  //       const user = new User(req.body);
+  //       await user.save();
+  //       res.status(201).json(user);
+  //     } catch (err) {
+  //       res.status(400).json({ error: err.message });
+  //     }
+  //   }
+  async registerUser(req, res) {
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      phoneNumber,
+      collegeName,
+      dateOfBirth,
+    } = req.body;
+
     try {
-      const user = new User(req.body);
+      const userExists = await User.findOne({ email });
+
+      if (userExists) {
+        req.flash("error", "User already exists with this email");
+        return res.redirect("/register");
+      }
+
+      const user = new User({
+        firstName,
+        lastName,
+        email,
+        password,
+        phoneNumber,
+        collegeName,
+        dateOfBirth,
+      });
+
       await user.save();
-      res.status(201).json(user);
-    } catch (err) {
-      res.status(400).json({ error: err.message });
+      req.flash("success", "User registered successfully");
+      res.redirect("/login");
+    } catch (error) {
+      req.flash("error", error.message);
+      res.redirect("/register");
     }
   }
 
@@ -119,7 +156,7 @@ async createUser(req, res) {
       req.flash("success", "Logged in successfully");
       res.redirect("/");
     } catch (error) {
-      req.flash("error", error.message);
+      req.flash("error", "Someting went wrong, try again");
       res.redirect("/login");
     }
   }

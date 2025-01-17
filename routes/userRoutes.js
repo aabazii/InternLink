@@ -5,38 +5,19 @@ const User = require('../models/User');
 const multer = require('multer');
 
 
-// //image upload
-// let storage = multer.diskStorage({
-//     destination: function(req,file,cb){
-//         cb(null, './uploads');
-//     },
-//     filename:function(req,file,cb){
-//         cb(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
-//     },
-// });
+//image upload
+let storage = multer.diskStorage({
+    destination: function(req,file,cb){
+        cb(null, './uploads');
+    },
+    filename:function(req,file,cb){
+        cb(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+    },
+});
 
-// let upload = multer({
-//     storage: storage,
-// }).single('image');
-
-
-
-// router.get("/users", (req,res)=> {
-//     res.send("All Users");
-// });
-
-
-
-
-//userController.getAllUsers);
-// router.post("/user", userController.createUser);
-// router.get("/:id", userController.getUserById);
-// router.put("/:id", userController.updateUser);
-// router.delete("/:id", userController.deleteUser);
-
-// module.exports = router;
-
-
+let upload = multer({
+    storage: storage,
+}).single('image');
 
 //Create a new company
 router.post("/user", (req, res) => userController.createUser(req, res));

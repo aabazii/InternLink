@@ -8,6 +8,7 @@ router.post("/", (req, res) => internshipController.createInternship(req, res));
 // Get all internships
 router.get("/", (req, res) => internshipController.getAllInternships(req, res));
 
+
 //Get a single internship by ID
 router.get("/:id", (req, res) =>
   internshipController.getInternshipById(req, res)
@@ -23,13 +24,7 @@ router.delete("/:id", (req, res) =>
   internshipController.deleteInternship(req, res)
 );
 
-router.get("/listing", (req, res) => {
-  res.render("job-listings");
-});
 
-router.get("/single", (req, res) => {
-  res.render("job-listing");
-});
 
 
 

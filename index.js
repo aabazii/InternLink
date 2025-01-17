@@ -11,6 +11,7 @@ const session = require("express-session");
 
 //cookieParser
 const cookieParser = require("cookie-parser");
+const Internship = require("./models/Internship");
 
 const app = express();
 
@@ -26,19 +27,24 @@ app.use(
   })
 );
 
+
+app.use(flash());
 app.use((req, res, next) => {
   res.locals.message = req.session.message;
   delete req.session.message;
   next();
 });
-
-app.use(flash());
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   next();
 });
 
+//store authenticated user's session data for views
+app.use(function(req, res, next){
+  res.locals.user = req.session.user || null;
+  next();
+});
 // Set the view engine to EJS
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -62,13 +68,14 @@ app.use("/internships", internshipRoutes);
 app.use("/companies", companyRoutes);
 app.use("/", authRoutes);
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   res.cookie("siteTheme", "dark", {
     maxAge: 3600000,
     httpOnly: true,
     secure: true,
   });
-  res.render("index");
+  const internships = await Internship.find();
+  res.render("index", {internships});
 });
 
 app.get("/about", (req, res) => {
@@ -91,6 +98,15 @@ app.get("/single", (req, res) => {
 app.get("/post", (req, res) => {
   res.render("post-job");
 });
+
+app.get("/listing", (req, res) => {
+  res.render("job-listings");
+});
+
+app.get("/single", (req, res) => {
+  res.render("job-single");
+});
+
 
 //Necessary cookies
 
