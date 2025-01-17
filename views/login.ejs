@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <title>InternLink</title>
     <meta charset="utf-8">
@@ -16,6 +17,7 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <%- include("./partials/nav.ejs") %>
+
 <body id="top">
     <div id="overlayer"></div>
     <div class="loader">
@@ -36,12 +38,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-7">
-                        <h1 class="text-white font-weight-bold">Sign Up/Login
+                        <h1 class="text-white font-weight-bold">Log In
                         </h1>
                         <div class="custom-breadcrumbs"> <a href="#">Home</a>
                             <span class="mx-2 slash">/</span> <span
                                 class="text-white"><strong>Log
-                                    In</strong></span> </div>
+                                    In</strong></span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -67,60 +70,52 @@
                             <div class="tab-pane fade show active"
                                 id="pills-user" role="tabpanel"
                                 aria-labelledby="pills-user-tab">
-                                <form action="/users" method="post">
-                                  <div class="form-group">
-                                      <label for="first-name">First Name</label>
-                                      <input type="text" class="form-control" id="first-name" name="firstName" required>
-                                  </div>
-                                  <div class="form-group">
-                                      <label for="last-name">Last Name</label>
-                                      <input type="text" class="form-control" id="last-name" name="lastName" required>
-                                  </div>
-                                  <div class="form-group">
-                                      <label for="email">Email</label>
-                                      <input type="email" class="form-control" id="email" name="email" required>
-                                  </div>
-                                  <div class="form-group">
-                                      <label for="password">Password</label>
-                                      <input type="password" class="form-control" id="password" name="password" required>
-                                  </div>
-                                  <div class="form-group">
-                                      <label for="phone-number">Phone Number</label>
-                                      <input type="text" class="form-control" id="phone-number" name="phoneNumber" required>
-                                  </div>
-                                  <div class="form-group">
-                                      <label for="college-name">College Name</label>
-                                      <input type="text" class="form-control" id="college-name" name="collegeName" required>
-                                  </div>
-                                  <div class="form-group">
-                                      <label for="date-of-birth">Date of Birth</label>
-                                      <input type="date" class="form-control" id="date-of-birth" name="dateOfBirth" required>
-                                  </div>
-                                  <button type="submit" class="btn btn-primary btn-block">Register</button>
-                              </form>
+                                <form action="/login/users" method="post">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control"
+                                            id="email" name="email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input type="password"
+                                            class="form-control" id="password"
+                                            name="password" required>
+                                    </div>
+                                    <button type="submit"
+                                        class="btn btn-primary btn-block">Log In</button>
+                                </form>
+                                <div class="mt-4 text-center">
+                                    <p>Not a user? <a href="/register">Register here</a></p> 
+                                </div>
                             </div>
                             <div class="tab-pane fade" id="pills-company"
                                 role="tabpanel"
                                 aria-labelledby="pills-company-tab">
-                                <form action="/companies" method="post">
-                                  <div class="form-group">
-                                      <label for="company-name">Company Name</label>
-                                      <input type="text" class="form-control" id="company-name" name="companyName" required>
-                                  </div>
-                                  <div class="form-group">
-                                      <label for="location">Location</label>
-                                      <input type="text" class="form-control" id="location" name="location" required>
-                                  </div>
-                                  <div class="form-group">
-                                      <label for="company-email">Email</label>
-                                      <input type="email" class="form-control" id="company-email" name="email" required>
-                                  </div>
-                                  <div class="form-group">
-                                      <label for="company-password">Password</label>
-                                      <input type="password" class="form-control" id="company-password" name="password" required>
-                                  </div>
-                                  <button type="submit" class="btn btn-primary btn-block">Register</button>
-                              </form>
+                                <form action="/register/companies" method="post">
+                                    <div class="form-group">
+                                <form action="/login/companies" method="post">
+                                    <div class="form-group">
+                                        <label for="company-email">Email</label>
+                                        <input type="email" class="form-control"
+                                            id="company-email" name="email"
+                                            required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label
+                                            for="company-password">Password</label>
+                                        <input type="password"
+                                            class="form-control"
+                                            id="company-password"
+                                            name="password" required>
+                                            <button type="submit"
+                                            class="btn btn-primary btn-block">Log In</button>
+                                    </div>
+                                </form>
+                                <div class="mt-4 text-center">
+                                    <p>Not a user? <a href="/register">Register here</a></p> 
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -144,4 +139,5 @@
     <script src="/js/custom.js"></script>
 </body>
 <%- include("./partials/footer.ejs") %>
+
 </html>

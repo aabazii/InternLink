@@ -4,7 +4,7 @@ const { isEmail } = require("validator");
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
+const userSchema = new mongoose.Schema({
   firstName: {
     type: String,
     required: [true, "Please enter your first name."],
@@ -45,7 +45,7 @@ const userSchema = new Schema({
   },
 });
 
-// fire a function before DOC saved to DB
+//Password hashing
 userSchema.pre("save", async function (next) {
   const salt = await bcrypt.genSalt();
   this.password = await bcrypt.hash(this.password, salt);

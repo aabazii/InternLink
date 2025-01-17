@@ -1,4 +1,5 @@
 const Company = require("../models/Company");
+const bcrypt = require('bcrypt');
 
 class CompanyController {
 
@@ -12,7 +13,7 @@ class CompanyController {
     }
   }
 
-  async getAllCompanys(_, res) {
+  async getAllCompany(_, res) {
     try {
       console.log("Fetching all companys...");
       const companys = await Company.find();
@@ -60,4 +61,4 @@ class CompanyController {
   }
 }
 
-module.exports = new CompanyController();
+module.exports = CompanyController;

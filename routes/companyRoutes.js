@@ -4,7 +4,7 @@ const companyController = require("../controllers/companyController");
 const router = express.Router();
 
 // Create a new company
-router.post("/", (req, res) => companyController.createCompany(req, res));
+router.post("/company", (req, res) => companyController.createCompany(req, res));
 
 // Get a single company by ID
 router.get("/:id", (req, res) => companyController.getCompany(req, res));

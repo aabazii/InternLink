@@ -1,14 +1,6 @@
 const express = require("express");
 const internshipController = require("../controllers/internshipController");
-
 const router = express.Router();
-
-// Render the form to add a new internship
-router.get("/add", (req, res) => {
-  res.render("post-job");
-});
-
-
 
 // Create a new internship
 router.post("/", (req, res) => internshipController.createInternship(req, res));
@@ -16,13 +8,29 @@ router.post("/", (req, res) => internshipController.createInternship(req, res));
 // Get all internships
 router.get("/", (req, res) => internshipController.getAllInternships(req, res));
 
-// Get a single internship by ID
-router.get("/:id", (req, res) => internshipController.getInternshipById(req, res));
+//Get a single internship by ID
+router.get("/:id", (req, res) =>
+  internshipController.getInternshipById(req, res)
+);
 
 // Update an internship by ID
-router.put("/:id", (req, res) => internshipController.updateInternship(req, res));
+router.put("/:id", (req, res) =>
+  internshipController.updateInternship(req, res)
+);
 
 // Delete an internship by ID
-router.delete("/:id", (req, res) => internshipController.deleteInternship(req, res));
+router.delete("/:id", (req, res) =>
+  internshipController.deleteInternship(req, res)
+);
+
+router.get("/listing", (req, res) => {
+  res.render("job-listings");
+});
+
+router.get("/single", (req, res) => {
+  res.render("job-listing");
+});
+
+
 
 module.exports = router;
