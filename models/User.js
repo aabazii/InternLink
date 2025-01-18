@@ -43,6 +43,7 @@ const userSchema = new mongoose.Schema({
     type: Date,
     required: [true, "Please enter your date of birth."],
   },
+  logo: {type: String}
 });
 
 //Password hashing

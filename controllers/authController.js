@@ -3,45 +3,6 @@ const Company = require("../models/Company");
 const bcrypt = require("bcryptjs");
 
 class AuthController {
-    async registerUser(req, res) {
-      const { firstName, lastName, email, password, phoneNumber, collegeName, dateOfBirth } = req.body;
-
-      try {
-        const userExists = await User.findOne({ email });
-
-        if (userExists) {
-          req.flash("error", "User already exists with this email");
-          return res.redirect("/register");
-        }
-
-        const user = new User({
-          firstName,
-          lastName,
-          email,
-          password,
-          phoneNumber,
-          collegeName,
-          dateOfBirth,
-        });
-
-        await user.save();
-        req.flash("success", "User registered successfully");
-        res.redirect("/login");
-      } catch (error) {
-        req.flash("error", error.message);
-        res.redirect("/register");
-      }
-    }
-
-  //async createUser(req, res) {
-  //     try {
-  //       const user = new User(req.body);
-  //       await user.save();
-  //       res.status(201).json(user);
-  //     } catch (err) {
-  //       res.status(400).json({ error: err.message });
-  //     }
-  //   }
   async registerUser(req, res) {
     const {
       firstName,

@@ -8,6 +8,8 @@ const internshipRoutes = require("./routes/internshipRoutes");
 const companyRoutes = require("./routes/companyRoutes");
 const authRoutes = require("./routes/authRoutes");
 const session = require("express-session");
+const multer  = require('multer');
+
 
 //cookieParser
 const cookieParser = require("cookie-parser");
@@ -19,21 +21,17 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(
-  session({
-    secret: "my secret key",
-    saveUninitialized: true,
-    resave: false,
-  })
-);
+app.use( session({secret: "my secret key", saveUninitialized: true, resave: false,}));
 
 
+//Flash messages
 app.use(flash());
 app.use((req, res, next) => {
   res.locals.message = req.session.message;
   delete req.session.message;
   next();
 });
+
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
@@ -43,6 +41,12 @@ app.use((req, res, next) => {
 //store authenticated user's session data for views
 app.use(function(req, res, next){
   res.locals.user = req.session.user || null;
+  next();
+});
+
+//store authenticated companies' session data for views
+app.use(function(req, res, next){
+  res.locals.company = req.session.company || null;
   next();
 });
 // Set the view engine to EJS
@@ -62,31 +66,26 @@ mongoose
   .catch((err) => console.error("MongoDB connection error:", err));
 
 // Routes
-//app.use("", require("./routes/userRoutes"));
 app.use("/users", userRoutes);
 app.use("/internships", internshipRoutes);
-app.use("/companies", companyRoutes);
+app.use("/company", companyRoutes);
 app.use("/", authRoutes);
 
 app.get("/", async (req, res) => {
-  res.cookie("siteTheme", "dark", {
-    maxAge: 3600000,
-    httpOnly: true,
-    secure: true,
-  });
   const internships = await Internship.find();
-  res.render("index", {internships});
+  res.render("index", {internships, currentPage: "home"});
 });
 
 app.get("/about", (req, res) => {
-  res.render("about");
+  res.render("about", { currentPage: "about" });
 });
 
 app.get("/pages", (req, res) => {
-  res.render("services");
+  res.render("services", { currentPage: "pages" });
 });
+
 app.get("/services", (req, res) => {
-  res.render("services");
+  res.render("services", { currentPage: "services" });
 });
 app.get("/services-single", (req, res) => {
   res.render("services-single");
@@ -95,22 +94,18 @@ app.get("/single", (req, res) => {
   res.render("services");
 });
 // Render the form to add a new internship
-app.get("/post", (req, res) => {
-  res.render("post-job");
-});
+// app.get("/post", protectedRoute, function(req, res) {
+//   res.render("post-job", { currentPage: "post" });
+// });
 
-app.get("/listing", (req, res) => {
-  res.render("job-listings");
+app.get("/listing", async (req, res) => {
+  const internships = await Internship.find();
+  res.render("job-listings", {internships, currentPage: "job-listings"});
 });
 
 app.get("/single", (req, res) => {
   res.render("job-single");
 });
-
-app.get("/profile", (req, res) => {
-  res.render("profile");
-});
-
 
 //Necessary cookies
 
@@ -120,7 +115,7 @@ app.get("/login", (req, res) => {
     httpOnly: true, // Prevents JavaScript access
     secure: true, // Ensures HTTPS usage
     sameSite: "Strict", // Prevents cross-site requests
-    maxAge: 3600000, // Expires in 1 hour
+    maxAge: 36000000, // Expires in 1 hour
   });
   res.send("Session cookie set.");
 });
@@ -162,3 +157,15 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+// document.querySelectorAll('.form-check-input').forEach((radio) => {
+//   radio.addEventListener('change', function () {
+//       // Get the label of the selected radio button
+//       const selectedText = this.nextElementSibling.textContent.trim();
+
+//       // Update the dropdown button text
+//       const dropdownButton = document.getElementById('dropdownCity');
+//       dropdownButton.textContent = selectedText;
+//   });
+// });
+

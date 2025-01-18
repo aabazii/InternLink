@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include('partials/nav.ejs') %>
+  <div class="container mt-5">
+    <h1>Company Dashboard</h1>
+    <% if (company) { %>
+      <div class="card">
+        <div class="card-header">
+          <h2><%= company.companyName %></h2>
+        </div>
+        <div class="card-body">
+          <p><strong>Location:</strong> <%= company.location %></p>
+          <p><strong>Email:</strong> <%= company.email %></p>
+          <p><strong>Internships:</strong></p>
+          <ul>
+            <% company.internships.forEach(internship => { %>
+              <li><%= internship.title %> - <%= internship.duration %></li>
+            <% }) %>
+          </ul>
+        </div>
+      </div>
+    <% } else { %>
+      <p>No company details available.</p>
+    <% } %>
+  </div>
+  <script src="/js/scripts.js"></script>
+</body>
+</html>

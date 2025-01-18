@@ -32,7 +32,7 @@
                             <ul class="dropdown">
                                 <li><a href="/internship single">Internship
                                         Single</a></li>
-                                <li><a href="/internships">Post Internship</a>
+                                <li><a href="/post">Post Internship</a>
                                 </li>
                             </ul>
                         </li>
@@ -53,30 +53,43 @@
                             </ul>
                         </li>
                         <li><a href="contact.html">Contact</a></li>
+                        <% if (user || company) { %>
+                        <li><a href="/profile">Profile</a></li>
+
+                        
+                        <% } %>
                         <li class="d-lg-none"><a href="/post"><span
                                     class="mr-2">+</span> Post Internship</a>
                         </li>
-                        <li class="d-lg-none"><a href="/login">Log In</a></li>
+                        <li class="d-lg-none"><a href="/login">Log out</a></li>
                     </ul>
                 </nav>
 
                 <div
                     class="right-cta-menu text-right d-flex aligin-items-center col-6">
                     <div class="ml-auto">
-                        <% if (user) { %>
-                        <li class="has-children">
-                            <ul class="dropdown">
-                                <%= user.name %>
-                                <li><a href="/profile">Profile</a></li>
-                                <li><a href="/logout">Logout</a></li>
-                            </ul>
-                        </li>                        
-                        <% } %><a href="/post"
-                            class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span
-                                class="mr-2 icon-add"></span>Post Internship</a>
-                        <a href="/login"
+                        
+                        <% if (!user) { %><a href="/post"
+                            class="btn btn-outline-white border-width-2 d-none d-lg-inline-block">
+                            <span class="mr-2 icon-add"></span>Post Internship
+                        </a>
+
+                        
+                        <% } %>
+                        <% if (user || company) { %><a href="/logout"
+                            class="btn btn-primary border-width-2 d-none d-lg-inline-block"
+                            style="background-color: red; color: white; border: 2px solid red;">
+                            <span class="mr-2 icon-lock_outline"></span>Log Out
+                        </a>
+
+                        
+                        <% } %>
+                        <% if (!user || !company) { %><a href="/login"
                             class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
                                 class="mr-2 icon-lock_outline"></span>Log In</a>
+
+                        
+                        <% } %>
                     </div>
                     <a href="#"
                         class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none mt-lg-2 ml-3"><span

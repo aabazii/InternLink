@@ -59,6 +59,20 @@ class CompanyController {
       res.status(500).json({ error: err.message });
     }
   }
+
+  async getCompanyDashboard(req, res) {
+    try {
+      const company = await Company.findById(req.session.company._id).populate('internships');
+      if (!company) {
+        req.flash("error", "Company not found");
+        return res.redirect("/login");
+      }
+      res.render("dashboard", { company });
+    } catch (err) {
+      req.flash("error", err.message);
+      res.redirect("/login");
+    }
+  }
 }
 
 module.exports = CompanyController;

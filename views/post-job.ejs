@@ -81,16 +81,20 @@
                 </div>
                 <div class="row mb-5">
                     <div class="col-lg-12">
-                        <form class="p-4 p-md-5 border rounded" action="/internships" method="POST">
+                        <form class="p-4 p-md-5 border rounded" action="/internships" method="POST" enctype="multipart/form-data">
                             <h3 class="text-black mb-5 border-bottom pb-2">
                                 Internship Details</h3>
-                            <div class="form-group">
-                                <label for="company-website-tw d-block">Upload
+                            <!-- <div class="form-group">
+                                <label for="logo">Upload
                                     Featured Image</label> <br>
                                 <label class="btn btn-primary btn-md btn-file">
-                                    Browse File<input type="file" hidden>
+                                    Browse File<input type="file" name="logo">
                                 </label>
-                            </div>
+                            </div> -->
+                            <div class="form-group">
+                                <label for="logo"></label>
+                                <input type="file" class="btn btn-primary btn-md btn-file" id="logo" name="logo" >
+                              </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <input type="text" class="form-control"
@@ -115,18 +119,6 @@
                                     id="deadline" name="deadline" placeholder=""
                                     required>
                             </div>
-                            
-                            <!-- <div class="form-group">
-                <label for="job-region">Internship Region</label>
-                <select class="selectpicker border rounded" id="job-region" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Region">
-                      <option>Thessaloniki</option>
-                      <option>Athens</option>
-                      <option>Heraklion</option>
-                      <option>Larissa</option>
-                      <option>Patras</option>
-                      <option>Anywhere</option>
-                    </select>
-              </div> -->
                             <div class="form-group">
                                 <label for="internType">Internship
                                     Type</label>

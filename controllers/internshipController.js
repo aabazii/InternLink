@@ -1,54 +1,26 @@
-// const Internship = require('../models/Internship');
-
-// // Create a new internship
-// const createInternship = (req, res) => {
-//     // Logic to create a new internship
-//     res.send('Create internship');
-// };
-
-// // Read all internships
-// const getAllInternships = (req, res) => {
-//     Internship.find({}, (err, internships) => {
-//         if (err) {
-//             return res.status(500).send(err);
-//         }
-//         res.json(internships);
-//     });
-//     res.send('Get internships');
-// };
-
-// // Read a single internship by ID
-// const getInternshipById = (req, res) => {
-//     // Logic to get a single internship by ID
-//     res.send('Get internship by ID');
-// };
-
-// // Update an internship by ID
-// const updateInternshipById = (req, res) => {
-//     // Logic to update an internship by ID
-//     res.send('Update internship by ID');
-// };
-
-// // Delete an internship by ID
-// const deleteInternshipById = (req, res) => {
-//     // Logic to delete an internship by ID
-//     res.send('Delete internship by ID');
-// };
-
-// module.exports = {
-//     createInternship,
-//     getAllInternships,
-//     getInternshipById,
-//     updateInternshipById,
-//     deleteInternshipById
-// };
 const Internship = require("../models/Internship");
+const multer = require("multer");
+const path = require("path");
+
+// Set up multer for file uploads
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, " /images");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({ storage: storage });
 
 class InternshipController {
-
   async createInternship(req, res) {
     try {
-      const internship = new Internship(req.body);
+      const internship = new Internship({
+        ...req.body,
+        logo: req.file ? req.file.path : null,
+      });
       await internship.save();
       res.status(201).json(internship);
     } catch (err) {
@@ -56,22 +28,12 @@ class InternshipController {
     }
   }
 
-  async getAllInternships(_, res) {
+  async getAllInternships(req, res) {
     try {
-      const page = parseInt(req.query.page) || 1;
-      const limit = 7;
-      const skip = (page - 1) * limit;
-
-      const internships = await Internship.find().skip(skip).limit(limit);
-      const totalInternships = await Internship.countDocuments();
-
-      res.render("index", {
-        internships,
-        currentPage: page,
-        totalPages: Math.ceil(totalInternships / limit),
-      });
+      const internships = await Internship.find();
+      res.status(200).json(internships);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(500).json({ error: err.message });
     }
   }
 
@@ -89,7 +51,11 @@ class InternshipController {
 
   async updateInternship(req, res) {
     try {
-      const internship = await Internship.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      const internship = await Internship.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        { new: true, runValidators: true }
+      );
       if (!internship) {
         return res.status(404).json({ error: "Internship not found" });
       }
@@ -110,6 +76,18 @@ class InternshipController {
       res.status(500).json({ error: err.message });
     }
   }
+
+  async getInternshipByName(req, res) {
+    try {
+      const internship = await Internship.findOne(req.params.name);
+      if (!internship) {
+        return res.status(404).json({ error: "Internship not found" });
+      }
+      res.status(200).json(internship);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
 }
 
-module.exports = new InternshipController();
+module.exports = { InternshipController: new InternshipController(), upload };
