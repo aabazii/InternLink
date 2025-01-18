@@ -24,6 +24,8 @@ router.get('/profile', protectedRoute, (req, res)=>
   res.render('profile', { title: 'Profile Page'})
 );
 
+
+
 router.get('/post', protectedRoute, (req,res) => res.redirect('profile'));
 
 module.exports = router;

@@ -87,11 +87,32 @@ app.get("/pages", (req, res) => {
 app.get("/services", (req, res) => {
   res.render("services", { currentPage: "services" });
 });
-app.get("/services-single", (req, res) => {
-  res.render("services-single");
+app.get("/service-single", (req, res) => {
+  res.render("service-single");
+});
+app.get("/apply", (req, res) => {
+  res.render("apply", { currentPage: "apply"});
 });
 app.get("/single", (req, res) => {
   res.render("services");
+});
+app.get("/portfolio", (req, res) => {
+  res.render("portfolio", { currentPage: "portfolio" });
+});
+app.get("/portfolio-single", (req, res) => {
+  res.render("portfolio-single", { currentPage: "portfolio-single" });
+});
+app.get("/faq", (req, res) => {
+  res.render("faq", { currentPage: "faq" });
+});
+app.get("/gallery", (req, res) => {
+  res.render("gallery", { currentPage: "gallery" });
+});
+app.get("/testimonials", (req, res) => {
+  res.render("testimonials", { currentPage: "testimonials" });
+});
+app.get("/contact", (req, res) => {
+  res.render("contact", { currentPage: "contact" });
 });
 // Render the form to add a new internship
 // app.get("/post", protectedRoute, function(req, res) {
