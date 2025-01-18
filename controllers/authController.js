@@ -127,7 +127,7 @@ class AuthController {
 
       req.session.user = user;
       req.flash("success", "Logged in successfully");
-      res.redirect("/");
+      res.redirect("/profile");
     } catch (error) {
       req.flash("error", error.message);
       res.redirect("/login");

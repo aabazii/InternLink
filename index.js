@@ -107,6 +107,10 @@ app.get("/single", (req, res) => {
   res.render("job-single");
 });
 
+app.get("/profile", (req, res) => {
+  res.render("profile");
+});
+
 
 //Necessary cookies
 
