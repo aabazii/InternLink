@@ -95,7 +95,6 @@ class InternshipController {
       }
 
       const internships = await Internship.find(query);
-      console.log(query);
       res.render("job-listings", { internships });
     } catch (err) {
       res.status(500).json({ error: err.message });
