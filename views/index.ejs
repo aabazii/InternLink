@@ -20,20 +20,65 @@
 </head>
 <%- include("./partials/nav.ejs") %>
 <body id="top">
+    
     <div id="overlayer"></div>
     <div class="loader">
         <div class="spinner-border text-primary" role="status"> <span
                 class="sr-only">Loading...</span> </div>
     </div>
+    
     <div class="site-wrap">
-        <div class="site-mobile-menu site-navbar-target">
-            <div class="site-mobile-menu-header">
-                <div class="site-mobile-menu-close mt-3"> <span
-                        class="icon-close2 js-menu-toggle"></span> </div>
-            </div>
-            <div class="site-mobile-menu-body"></div>
-        </div> <!-- .site-mobile-menu --> <!-- HOME -->
+    
+          
         <%- include("./partials/searchBar.ejs") %>
+
+        <section class="bg-light pt-5 testimony-full">
+            <div class="owl-carousel single-carousel">
+                <div class="container">
+                    <div class="row">
+                        <div
+                            class="col-lg-6 align-self-center text-center text-lg-left">
+                            <blockquote>
+                                <p>&ldquo;Taking an internship isn’t about fetching coffee
+                                     or killing time—it’s about making connections,
+                                      learning the ropes, and proving you’re the
+                                       person they can’t afford to let go. Every 
+                                       small step can set you up for the big leagues.&rdquo;
+                                </p>
+                                <p><cite> &mdash; Harvey Specter, @Pearson Specter</cite>
+                                </p>
+                            </blockquote>
+                        </div>
+                        <div
+                            class="col-lg-6 align-self-end text-center text-lg-right">
+                            <img src="/images/specter.png"
+                                alt="Image" class="img-fluid mb-0"> </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div
+                            class="col-lg-6 align-self-center text-center text-lg-left">
+                            <blockquote>
+                                <p>&ldquo;An internship isn’t just about gaining 
+                                    experience; it’s about discovering what you’re 
+                                    capable of when you’re pushed outside your 
+                                    comfort zone. You don’t have to know 
+                                    everything—just be willing to learn
+                                     and work harder than anyone else.&rdquo;
+                                </p>
+                                <p><cite> &mdash; Mike Ross, @Pearson Specter</cite>
+                                </p>
+                            </blockquote>
+                        </div>
+                        <div
+                            class="col-lg-6 align-self-end text-center text-lg-right">
+                            <img src="/images/ross.png"
+                                alt="Image" class="img-fluid mb-0"> </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div> <!-- SCRIPTS -->
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
@@ -49,3 +94,8 @@
 </body>
 <%- include("./partials/footer.ejs") %>
 </html>
+
+
+
+
+

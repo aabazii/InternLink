@@ -1,12 +1,13 @@
 const Internship = require("../models/Internship");
 const multer = require("multer");
 const path = require("path");
-const alert = require('alert');
+const Company = require('../models/Company');
+
 
 // Set up multer for file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./public/images");
+    cb(null, "./uploads");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname));
@@ -23,7 +24,14 @@ class InternshipController {
         logo: req.file ? req.file.path : null,
       });
       await internship.save();
-      alert("Internship saved successfully")
+
+      const company = await Company.findById(req.body.companyId);
+      if (company) {
+        company.internshipsCreated.push(internship._id);
+        await company.save();
+      }
+
+    res.redirect('/internships/post');
     } catch (err) {
       res.status(400).json({ error: err.message });
     }

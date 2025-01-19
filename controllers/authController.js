@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const Company = require("../models/Company");
 const bcrypt = require("bcryptjs");
+const alert = require ('alert');
 
 class AuthController {
   async registerUser(req, res) {
@@ -87,6 +88,7 @@ class AuthController {
       }
 
       req.session.user = user;
+      alert("Successfully loged in");
       req.flash("success", "Logged in successfully");
       res.redirect("/profile");
     } catch (error) {
@@ -104,7 +106,7 @@ class AuthController {
         return res.redirect("/login");
       }
       req.session.company = company; // Ensure this line sets the session data
-      res.redirect("/company/dashboard");
+      res.redirect("/");
     } catch (err) {
       req.flash("error", err.message);
       res.redirect("/login");

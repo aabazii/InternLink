@@ -19,16 +19,18 @@ let upload = multer({
     storage: storage,
 }).single('image');
 
-//Create a new company
+//Create a new user
 router.post("/user", (req, res) => userController.createUser(req, res));
 
-// Get a single company by ID
+// Get a single user by ID
 router.get("/:id", (req, res) => userController.getUserById(req, res));
 
-// Update a company by ID
+// Update a user by ID
 router.put("/:id", (req, res) => userController.updateUser(req, res));
 
-// Delete a company by ID
+// Delete a user by ID
 router.delete("/:id", (req, res) => userController.deleteUser(req, res));
+
+router.post('/apply/:id', (req, res) => userController.applyForInternship(req, res));
 
 module.exports = router

@@ -4,8 +4,7 @@
 <head>
     <title>InternLink</title>
     <meta charset="utf-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="/css/custom-bs.css">
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css">
     <link rel="stylesheet" href="/css/bootstrap-select.min.css">
@@ -21,29 +20,21 @@
 <body id="top">
     <div id="overlayer"></div>
     <div class="loader">
-        <div class="spinner-border text-primary" role="status"> <span
-                class="sr-only">Loading...</span> </div>
+        <div class="spinner-border text-primary" role="status"> <span class="sr-only">Loading...</span> </div>
     </div>
     <div class="site-wrap">
         <div class="site-mobile-menu site-navbar-target">
             <div class="site-mobile-menu-header">
-                <div class="site-mobile-menu-close mt-3"> <span
-                        class="icon-close2 js-menu-toggle"></span> </div>
+                <div class="site-mobile-menu-close mt-3"> <span class="icon-close2 js-menu-toggle"></span> </div>
             </div>
             <div class="site-mobile-menu-body"></div>
         </div> <!-- .site-mobile-menu --> <!-- HOME -->
-        <section class="section-hero overlay inner-page bg-image"
-            style="background-image: url('images/hero_1.jpg');"
-            id="home-section">
+        <section class="section-hero overlay inner-page bg-image" style="background-image: url('images/hero_1.jpg');" id="home-section">
             <div class="container">
                 <div class="row">
                     <div class="col-md-7">
-                        <h1 class="text-white font-weight-bold">Log In
-                        </h1>
-                        <div class="custom-breadcrumbs"> <a href="#">Home</a>
-                            <span class="mx-2 slash">/</span> <span
-                                class="text-white"><strong>Log
-                                    In</strong></span>
+                        <h1 class="text-white font-weight-bold">Log In</h1>
+                        <div class="custom-breadcrumbs"> <a href="#">Home</a> <span class="mx-2 slash">/</span> <span class="text-white"><strong>Log In</strong></span>
                         </div>
                     </div>
                 </div>
@@ -53,47 +44,28 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-7 mb-5">
-                        <ul class="nav nav-pills mb-3" id="pills-tab"
-                            role="tablist">
-                            <li class="nav-item"> <a class="nav-link active"
-                                    id="pills-user-tab" data-toggle="pill"
-                                    href="#pills-user" role="tab"
-                                    aria-controls="pills-user"
-                                    aria-selected="true">User</a> </li>
-                            <li class="nav-item"> <a class="nav-link"
-                                    id="pills-company-tab" data-toggle="pill"
-                                    href="#pills-company" role="tab"
-                                    aria-controls="pills-company"
-                                    aria-selected="false">Company</a> </li>
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item"> <a class="nav-link active" id="pills-user-tab" data-toggle="pill" href="#pills-user" role="tab" aria-controls="pills-user" aria-selected="true">User</a> </li>
+                            <li class="nav-item"> <a class="nav-link" id="pills-company-tab" data-toggle="pill" href="#pills-company" role="tab" aria-controls="pills-company" aria-selected="false">Company</a> </li>
                         </ul>
                         <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade show active"
-                                id="pills-user" role="tabpanel"
-                                aria-labelledby="pills-user-tab">
-                                <form action="/login/user" method="post">
+                            <div class="tab-pane fade show active" id="pills-user" role="tabpanel" aria-labelledby="pills-user-tab">
+                                <form id="user-login-form" action="/login/user" method="post">
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input type="email" class="form-control"
-                                            id="email" name="email" required>
+                                        <input type="email" class="form-control" id="email" name="email" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="password">Password</label>
-                                        <input type="password"
-                                            class="form-control" id="password"
-                                            name="password" required>
+                                        <input type="password" class="form-control" id="password" name="password" required>
                                     </div>
-                                    <button type="submit"
-                                        class="btn btn-primary btn-block">Log
-                                        In</button>
+                                    <button type="submit" class="btn btn-primary btn-block">Log In</button>
                                 </form>
                                 <div class="mt-4 text-center">
-                                    <p>Not a user? <a href="/register">Register
-                                            here</a></p>
+                                    <p>Not a user? <a href="/register">Register here</a></p>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="pills-company"
-                                role="tabpanel"
-                                aria-labelledby="pills-company-tab">
+                            <div class="tab-pane fade" id="pills-company" role="tabpanel" aria-labelledby="pills-company-tab">
 
                                 <% if (success) { %>
                                     <div class="alert alert-success"><%= success %></div>
@@ -103,31 +75,19 @@
                                   <% } %>
 
                                 <div class="form-group">
-                                    <form action="/login/company" method="post">
+                                    <form id="company-login-form" action="/login/company" method="post">
                                         <div class="form-group">
-                                            <label
-                                                for="company-email">Email</label>
-                                            <input type="email"
-                                                class="form-control"
-                                                id="company-email" name="email"
-                                                required>
+                                            <label for="company-email">Email</label>
+                                            <input type="email" class="form-control" id="company-email" name="email" required>
                                         </div>
                                         <div class="form-group">
-                                            <label
-                                                for="company-password">Password</label>
-                                            <input type="password"
-                                                class="form-control"
-                                                id="company-password"
-                                                name="password" required>
-                                            <button type="submit"
-                                                class="btn btn-primary btn-block">Log
-                                                In</button>
+                                            <label for="company-password">Password</label>
+                                            <input type="password" class="form-control" id="company-password" name="password" required>
+                                            <button type="submit" class="btn btn-primary btn-block">Log In</button>
                                         </div>
                                     </form>
                                     <div class="mt-4 text-center">
-                                        <p>Not a user? <a
-                                                href="/register">Register
-                                                here</a></p>
+                                        <p>Not a user? <a href="/register">Register here</a></p>
                                     </div>
 
                                 </div>

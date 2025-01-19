@@ -9,6 +9,7 @@ const companyRoutes = require("./routes/companyRoutes");
 const authRoutes = require("./routes/authRoutes");
 const session = require("express-session");
 const multer = require("multer");
+const methodOverride = require('method-override');
 
 //cookieParser
 const cookieParser = require("cookie-parser");
@@ -66,6 +67,9 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
+// Method override middleware
+app.use(methodOverride("_method"));
+
 // Routes
 app.use("/users", userRoutes);
 app.use("/internships", internshipRoutes);
@@ -88,26 +92,29 @@ app.get("/pages", (req, res) => {
 app.get("/services", (req, res) => {
   res.render("services", { currentPage: "services" });
 });
-app.get("/service-single", (req, res) => {
-  res.render("service-single");
-});
 app.get("/apply", (req, res) => {
   res.render("apply", { currentPage: "apply" });
 });
-app.get("/single", (req, res) => {
-  res.render("services");
+
+
+app.get("/single/:id", async (req, res) => {
+  try {
+    const internship = await Internship.findById(req.params.id);
+    if (!internship) {
+      return res.status(404).send("Internship not found");
+    }
+    res.render("job-single", { internship });
+  } catch (err) {
+    res.status(500).send("Server error");
+  }
 });
+
+
 app.get("/portfolio", (req, res) => {
   res.render("portfolio", { currentPage: "portfolio" });
 });
-app.get("/portfolio-single", (req, res) => {
-  res.render("portfolio-single", { currentPage: "portfolio-single" });
-});
 app.get("/faq", (req, res) => {
   res.render("faq", { currentPage: "faq" });
-});
-app.get("/gallery", (req, res) => {
-  res.render("gallery", { currentPage: "gallery" });
 });
 app.get("/testimonials", (req, res) => {
   res.render("testimonials", { currentPage: "testimonials" });
@@ -125,7 +132,7 @@ app.get("/contact", (req, res) => {
 //   res.render("job-listings", {internships, currentPage: "job-listings"});
 // });
 
-app.get("/listing", InternshipController.searchInternships);
+//app.get("/listing", InternshipController.searchInternships);
 
 app.get("/", InternshipController.searchInternships);
 

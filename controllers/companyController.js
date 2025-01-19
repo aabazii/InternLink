@@ -62,8 +62,8 @@ class CompanyController {
 
   async getCompanyDashboard(req, res) {
     try {
-      const company = await Company.findById(req.session.company._id).populate('internships');
-      if (!company) {
+      //const company = await Company.findById(req.session.company._id).populate('internships');
+      if (!req.session.company) {
         req.flash("error", "Company not found");
         return res.redirect("/login");
       }

@@ -43,7 +43,10 @@ const userSchema = new mongoose.Schema({
     type: Date,
     required: [true, "Please enter your date of birth."],
   },
-  logo: {type: String}
+  logo: {type: String},
+
+  internshipsApplied: [{ type: mongoose.Schema.Types.ObjectId, ref: "Internship" }]
+
 });
 
 //Password hashing
