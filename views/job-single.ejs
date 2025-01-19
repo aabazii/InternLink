@@ -41,8 +41,8 @@
           <div class="col-md-7">
             <h1 class="text-white font-weight-bold"><%= internship.name %></h1>
             <div class="custom-breadcrumbs">
-              <a href="#">Home</a> <span class="mx-2 slash">/</span>
-              <a href="#">Internship</a> <span class="mx-2 slash">/</span>
+              <a href="/">Home</a> <span class="mx-2 slash">/</span>
+              <a href="/internships/listing">Internship</a> <span class="mx-2 slash">/</span>
               <span class="text-white"><strong><%= internship.name %></strong></span>
             </div>
           </div>
@@ -56,14 +56,14 @@
           <div class="col-lg-8 mb-4 mb-lg-0">
             <div class="d-flex align-items-center">
               <div class="border p-2 d-inline-block mr-3 rounded">
-                <img src="<%= internship.logo %>" alt="Image">
+                <img src="/uploads/<%= internship.logo %>" alt="Image">
               </div>
               <div>
                 <h2><%= internship.name %></h2>
                 <div>
-                  <span class="ml-0 mr-2 mb-2"><span class="icon-briefcase mr-2"></span><%= internship.company %></span>
+                  <span class="ml-0 mr-2 mb-2"><span class="icon-briefcase mr-2"></span><%= internship.type%></span>
                   <span class="m-2"><span class="icon-room mr-2"></span><%= internship.location %></span>
-                  <span class="m-2"><span class="icon-clock-o mr-2"></span><span class="text-primary"><%= internship.type %></span></span>
+                  <span class="m-2"><span class="icon-clock-o mr-2"></span><span class="text-primary"><%= internship.internType %></span></span>
                 </div>
               </div>
             </div>
@@ -92,9 +92,8 @@
         <div class="row">
           <div class="col-lg-8">
             <div class="mb-5">
-              <figure class="mb-5"><img src="<%= internship.image %>" alt="Image" class="img-fluid rounded"></figure>
               <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-align-left mr-3"></span>Internship Description</h3>
-              <p><%= internship.description %></p>
+              <p><%= internship.details %></p>
             </div>
             <div class="row mb-5">
             </div>
@@ -105,13 +104,9 @@
             <div class="bg-light p-3 border rounded mb-4">
               <h3 class="text-primary mt-3 h5 pl-3 mb-3">Internship Summary</h3>
               <ul class="list-unstyled pl-3 mb-0">
-                <li class="mb-2"><strong class="text-black">Published on:</strong> <%= internship.publishedDate %></li>
-                <li class="mb-2"><strong class="text-black">Vacancy:</strong> <%= internship.vacancy %></li>
-                <li class="mb-2"><strong class="text-black">Employment Status:</strong> <%= internship.employmentStatus %></li>
                 <li class="mb-2"><strong class="text-black">Experience:</strong> <%= internship.experience %></li>
                 <li class="mb-2"><strong class="text-black">Internship Location:</strong> <%= internship.location %></li>
-                <li class="mb-2"><strong class="text-black">Salary:</strong> <%= internship.salary %></li>
-                <li class="mb-2"><strong class="text-black">Gender:</strong> <%= internship.gender %></li>
+                <li class="mb-2"><strong class="text-black">Salary:</strong> <%= internship.payment %></li>
                 <li class="mb-2"><strong class="text-black">Application Deadline:</strong> <%= internship.deadline %></li>
               </ul>
             </div>
@@ -132,41 +127,52 @@
     </section> 
 
     <section class="bg-light pt-5 testimony-full">
-        
-        <div class="owl-carousel single-carousel">
-
-        
+      <div class="owl-carousel single-carousel">
           <div class="container">
-            <div class="row">
-              <div class="col-lg-6 align-self-center text-center text-lg-left">
-                <blockquote>
-                  <p>&ldquo;Soluta quasi cum delectus eum facilis recusandae nesciunt molestias accusantium libero dolores repellat id in dolorem laborum ad modi qui at quas dolorum voluptatem voluptatum repudiandae.&rdquo;</p>
-                  <p><cite> &mdash; Corey Woods, @Dribbble</cite></p>
-                </blockquote>
+              <div class="row">
+                  <div
+                      class="col-lg-6 align-self-center text-center text-lg-left">
+                      <blockquote>
+                          <p>&ldquo;Taking an internship isn’t about fetching coffee
+                               or killing time—it’s about making connections,
+                                learning the ropes, and proving you’re the
+                                 person they can’t afford to let go. Every 
+                                 small step can set you up for the big leagues.&rdquo;
+                          </p>
+                          <p><cite> &mdash; Harvey Specter, @Pearson Specter</cite>
+                          </p>
+                      </blockquote>
+                  </div>
+                  <div
+                      class="col-lg-6 align-self-end text-center text-lg-right">
+                      <img src="/images/specter.png"
+                          alt="Image" class="img-fluid mb-0"> </div>
               </div>
-              <div class="col-lg-6 align-self-end text-center text-lg-right">
-                <img src="/images/person_transparent_2.png" alt="Image" class="img-fluid mb-0">
-              </div>
-            </div>
           </div>
-
           <div class="container">
-            <div class="row">
-              <div class="col-lg-6 align-self-center text-center text-lg-left">
-                <blockquote>
-                  <p>&ldquo;Soluta quasi cum delectus eum facilis recusandae nesciunt molestias accusantium libero dolores repellat id in dolorem laborum ad modi qui at quas dolorum voluptatem voluptatum repudiandae.&rdquo;</p>
-                  <p><cite> &mdash; Chris Peters, @Google</cite></p>
-                </blockquote>
+              <div class="row">
+                  <div
+                      class="col-lg-6 align-self-center text-center text-lg-left">
+                      <blockquote>
+                          <p>&ldquo;An internship isn’t just about gaining 
+                              experience; it’s about discovering what you’re 
+                              capable of when you’re pushed outside your 
+                              comfort zone. You don’t have to know 
+                              everything—just be willing to learn
+                               and work harder than anyone else.&rdquo;
+                          </p>
+                          <p><cite> &mdash; Mike Ross, @Pearson Specter</cite>
+                          </p>
+                      </blockquote>
+                  </div>
+                  <div
+                      class="col-lg-6 align-self-end text-center text-lg-right">
+                      <img src="/images/ross.png"
+                          alt="Image" class="img-fluid mb-0"> </div>
               </div>
-              <div class="col-lg-6 align-self-end text-center text-lg-right">
-                <img src="/images/person_transparent.png" alt="Image" class="img-fluid mb-0">
-              </div>
-            </div>
           </div>
-
       </div>
-
-    </section>
+  </section>
 
   
   </div>

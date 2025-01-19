@@ -62,23 +62,10 @@
                         <form class="p-4 p-md-5 border rounded" action="/internships" method="POST" enctype="multipart/form-data">
                             <h3 class="text-black mb-5 border-bottom pb-2">
                                 Internship Details</h3>
-                            <!-- <div class="form-group">
-                                <label for="logo">Upload
-                                    Featured Image</label> <br>
-                                <label class="btn btn-primary btn-md btn-file">
-                                    Browse File<input type="file" name="logo">
-                                </label>
-                            </div> -->
                             <div class="form-group">
-                                <label for="logo"></label>
+                                <label for="logo">Logo</label>
                                 <input type="file" class="btn btn-primary btn-md btn-file" id="logo" name="logo" >
                               </div>
-                            <!-- <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="text" class="form-control"
-                                    id="email" name="email"
-                                    placeholder="you@yourdomain.com">
-                            </div> -->
                             <div class="form-group">
                                 <label for="name">Internship Title</label>
                                 <input type="text" class="form-control"
@@ -106,6 +93,30 @@
                                     title="Select Job Type" name="internType" required>
                                     <option>Part Time</option>
                                     <option>Full Time</option>
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="internType">Internship
+                                    Type</label>
+                                <select class="selectpicker border rounded"
+                                    id="type" data-style="btn-black"
+                                    data-width="100%" data-live-search="true"
+                                    title="Select Job Type" name="type" required>
+                                    <option>Remote</option>
+                                    <option>On-Site</option>
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="experience">Experience</label>
+                                <select class="selectpicker border rounded"
+                                    id="job-type" data-style="btn-black"
+                                    data-width="100%" data-live-search="true"
+                                    title="Select Job Type" name="experience" required>
+                                    <option>None</option>
+                                    <option>1-2 years preferred</option>
+                                    <option>3-5 years preferred</option>
 
                                 </select>
                             </div>

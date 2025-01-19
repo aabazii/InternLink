@@ -6,12 +6,10 @@ const Company = require('../models/Company');
 
 // Set up multer for file uploads
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./uploads");
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
+  destination: './public/uploads/',
+  filename: function(req, file, cb){
+    cb(null, file.originalname);
+  }
 });
 
 const upload = multer({ storage: storage });
@@ -19,9 +17,17 @@ const upload = multer({ storage: storage });
 class InternshipController {
   async createInternship(req, res) {
     try {
+      let logoFilename = null;
+      if (req.file) {
+        logoFilename = req.file.originalname;
+        await sharp(req.file.buffer)
+          .resize(300, 300) // Resize to 300x300 pixels
+          .toFile(path.join(__dirname, '../public/uploads/', logoFilename));
+      }
+
       const internship = new Internship({
         ...req.body,
-        logo: req.file ? req.file.path : null,
+        logo: req.file ? req.file.filename : null,
       });
       await internship.save();
 
@@ -31,7 +37,7 @@ class InternshipController {
         await company.save();
       }
 
-    res.redirect('/internships/post');
+      res.redirect('/internships/post');
     } catch (err) {
       res.status(400).json({ error: err.message });
     }

@@ -41,7 +41,7 @@
               <% internships.forEach(internship => { %>
                 <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
                   <div class="job-listing-logo">
-                    <img src="../<%= internship.company %>" alt="Company Logo" class="img-fluid">
+                    <img src="/uploads/<%= internship.logo %>" alt="Company Logo" class="img-fluid">
                   </div>
                   <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
                     <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
@@ -79,7 +79,7 @@
                 <div class="col-md-6 text-center text-md-right">
                   <div class="custom-pagination ml-auto">
                     <% if (currentPage > 1) { %>
-                      <a href="?page=<%= currentPage - 1 %>" class="prev">Prev</a>
+                      <a href="?page=<%= Number(currentPage) - 1 %>" class="prev">Prev</a>
                     <% } %>
                     <div class="d-inline-block">
                       <% for (let i = 1; i <= totalPages; i++) { %>
@@ -87,7 +87,7 @@
                       <% } %>
                     </div>
                     <% if (currentPage < totalPages) { %>
-                      <a href="?page=<%= currentPage + 1 %>" class="next">Next</a>
+                      <a href="?page=<%= Number(currentPage) + 1 %>" class="next">Next</a>
                     <% } %>
                   </div>
                 </div>
