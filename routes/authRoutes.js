@@ -26,6 +26,6 @@ router.get('/profile', protectedRoute, (req, res)=>
 
 
 
-router.get('/post', protectedRoute, (req,res) => res.redirect('profile'));
+router.get('/post', protectedRoute, (req,res) => res.render('post-job'));
 
 module.exports = router;

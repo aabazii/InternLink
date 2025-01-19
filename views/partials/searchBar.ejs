@@ -17,6 +17,7 @@
                 <div class="col-md-12">
                     <div class="mb-5 text-center">
                         <h1 class="text-white font-weight-bold">Get Your Dream Internship</h1>
+
                     </div>
                     <form method="get" class="search-jobs-form"
                         onsubmit="handleSearch(event)">
@@ -137,6 +138,24 @@
                                                 <label class="form-check-label"
                                                     for="job-onsite">On-site</label>
                                             </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input"
+                                                    type="checkbox"
+                                                    name="jobType"
+                                                    id="pa"
+                                                    value="Paid">
+                                                <label class="form-check-label"
+                                                    for="payment">Paid</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input"
+                                                    type="checkbox"
+                                                    name="jobType"
+                                                    id="job-onsite"
+                                                    value="Not Paid">
+                                                <label class="form-check-label"
+                                                    for="payment">Not Paid</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -161,12 +180,13 @@
                                 .querySelectorAll(
                                     'input[name="jobType"]:checked')).map(
                                 el => el.value).join(',');
+                            const payment = Array.from(document.querySelectorAll('input[name="jobType"]:checked')).some(el => el.value === 'Paid') ? 'Paid' : 'Not Paid';
                             let url = '/listing';
                             const params = new URLSearchParams();
-                            if (searchText) params.append('searchText',
-                                searchText);
+                            if (searchText) params.append('searchText', searchText);
                             if (city) params.append('city', city);
                             if (jobTypes) params.append('jobType', jobTypes);
+                            if (payment) params.append('payment', payment);
                             if (params.toString()) {
                                 url += `?${params.toString()}`;
                             }

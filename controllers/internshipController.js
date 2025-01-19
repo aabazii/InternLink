@@ -1,11 +1,12 @@
 const Internship = require("../models/Internship");
 const multer = require("multer");
 const path = require("path");
+const alert = require('alert');
 
 // Set up multer for file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, " /images");
+    cb(null, "./public/images");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname));
@@ -22,7 +23,7 @@ class InternshipController {
         logo: req.file ? req.file.path : null,
       });
       await internship.save();
-      res.status(201).json(internship);
+      alert("Internship saved successfully")
     } catch (err) {
       res.status(400).json({ error: err.message });
     }
@@ -31,7 +32,7 @@ class InternshipController {
   async getAllInternships(req, res) {
     try {
       const internships = await Internship.find();
-      res.status(200).json(internships);
+      res.render("job-listings", { internships });
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
@@ -79,7 +80,7 @@ class InternshipController {
 
   async searchInternships(req, res) {
     try {
-      const { searchText, city, jobType } = req.query;
+      const { searchText, city, jobType, payment } = req.query;
       const query = {};
 
       if (searchText) {
@@ -90,8 +91,12 @@ class InternshipController {
         query.location = city;
       }
 
-      if (jobType) {
+      if (jobType && typeof jobType === 'string') {
         query.internType = { $in: jobType.split(",") };
+      }
+
+      if(payment){
+        query.payment = payment
       }
 
       const internships = await Internship.find(query);

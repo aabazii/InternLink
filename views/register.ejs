@@ -70,24 +70,6 @@
                             <div class="tab-pane fade show active"
                                 id="pills-user" role="tabpanel"
                                 aria-labelledby="pills-user-tab">
-                                <% if (success) { %>
-                                <div class="alert alert-success">
-                                    <%= success %>
-                                </div>
-
-
-
-                                
-                                <% } %>
-                                <% if (error) { %>
-                                <div class="alert alert-danger">
-                                    <%= error %>
-                                </div>
-
-
-
-                                
-                                <% } %>
                                 <form action="/register/user" method="post">
                                     <div class="form-group">
                                         <label for="firstName">First
@@ -145,21 +127,6 @@
                             <div class="tab-pane fade" id="pills-company"
                                 role="tabpanel"
                                 aria-labelledby="pills-company-tab">
-                                
-                                <% if (success) { %>
-                                <div class="alert alert-success">
-                                    <%= success %>
-                                </div>
-
-                                
-                                <% } %>
-                                <% if (error) { %>
-                                <div class="alert alert-danger">
-                                    <%= error %>
-                                </div>
-
-                                
-                                <% } %>
                                 <form action="/register/company" method="post">
                                     <div class="form-group">
                                         <label for="companyName">Company
@@ -212,6 +179,14 @@
     <script src="/js/quill.min.js"></script>
     <script src="/js/bootstrap-select.min.js"></script>
     <script src="/js/custom.js"></script>
+    <script>
+         if (success) { 
+          alert("<%= success %>");
+        } else if (error) { 
+          alert("<%= error %>");
+         } 
+      </script>
+
 </body>
 <%- include("./partials/footer.ejs") %>
 
