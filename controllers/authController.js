@@ -96,28 +96,17 @@ class AuthController {
   }
 
   async loginCompany(req, res) {
-    const { email, password } = req.body;
-
     try {
-      const company = await Company.findOne({ email });
-
-      if (!company) {
+      const company = await Company.findOne({ email: req.body.email });
+      const isMatch = await bcrypt.compare(req.body.password, company.password);
+      if (!company || !isMatch) {
         req.flash("error", "Invalid email or password");
         return res.redirect("/login");
       }
-
-      const isMatch = await bcrypt.compare(password, company.password);
-
-      if (!isMatch) {
-        req.flash("error", "Invalid email or password");
-        return res.redirect("/login");
-      }
-
-      req.session.company = company;
-      req.flash("success", "Logged in successfully");
-      res.redirect("/");
-    } catch (error) {
-      req.flash("error", "Someting went wrong, try again");
+      req.session.company = company; // Ensure this line sets the session data
+      res.redirect("/company/dashboard");
+    } catch (err) {
+      req.flash("error", err.message);
       res.redirect("/login");
     }
   }

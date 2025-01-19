@@ -77,17 +77,29 @@ class InternshipController {
     }
   }
 
-  async getInternshipByName(req, res) {
+  async searchInternships(req, res) {
     try {
-      const internship = await Internship.findOne(req.params.name);
-      if (!internship) {
-        return res.status(404).json({ error: "Internship not found" });
+      const { searchText, city, jobType } = req.query;
+      const query = {};
+
+      if (searchText) {
+        query.name = new RegExp(searchText, "i");
       }
-      res.status(200).json(internship);
+
+      if (city) {
+        query.location = city;
+      }
+
+      if (jobType) {
+        query.internType = { $in: jobType.split(",") };
+      }
+
+      const internships = await Internship.find(query);
+      console.log(query);
+      res.render("job-listings", { internships });
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
   }
 }
-
 module.exports = { InternshipController: new InternshipController(), upload };

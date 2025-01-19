@@ -21,4 +21,6 @@ router.get("/name/:name", (req, res) => InternshipController.getInternshipByName
 // Delete an internship by ID
 router.delete("/:id", (req, res) => InternshipController.deleteInternship(req, res));
 
+
+
 module.exports = router;

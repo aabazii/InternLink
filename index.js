@@ -8,12 +8,12 @@ const internshipRoutes = require("./routes/internshipRoutes");
 const companyRoutes = require("./routes/companyRoutes");
 const authRoutes = require("./routes/authRoutes");
 const session = require("express-session");
-const multer  = require('multer');
-
+const multer = require("multer");
 
 //cookieParser
 const cookieParser = require("cookie-parser");
 const Internship = require("./models/Internship");
+const { InternshipController } = require("./controllers/internshipController");
 
 const app = express();
 
@@ -21,8 +21,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use( session({secret: "my secret key", saveUninitialized: true, resave: false,}));
-
+app.use(
+  session({ secret: "my secret key", saveUninitialized: true, resave: false })
+);
 
 //Flash messages
 app.use(flash());
@@ -39,13 +40,13 @@ app.use((req, res, next) => {
 });
 
 //store authenticated user's session data for views
-app.use(function(req, res, next){
+app.use(function (req, res, next) {
   res.locals.user = req.session.user || null;
   next();
 });
 
 //store authenticated companies' session data for views
-app.use(function(req, res, next){
+app.use(function (req, res, next) {
   res.locals.company = req.session.company || null;
   next();
 });
@@ -73,7 +74,7 @@ app.use("/", authRoutes);
 
 app.get("/", async (req, res) => {
   const internships = await Internship.find();
-  res.render("index", {internships, currentPage: "home"});
+  res.render("index", { internships, currentPage: "home" });
 });
 
 app.get("/about", (req, res) => {
@@ -91,7 +92,7 @@ app.get("/service-single", (req, res) => {
   res.render("service-single");
 });
 app.get("/apply", (req, res) => {
-  res.render("apply", { currentPage: "apply"});
+  res.render("apply", { currentPage: "apply" });
 });
 app.get("/single", (req, res) => {
   res.render("services");
@@ -119,10 +120,14 @@ app.get("/contact", (req, res) => {
 //   res.render("post-job", { currentPage: "post" });
 // });
 
-app.get("/listing", async (req, res) => {
-  const internships = await Internship.find();
-  res.render("job-listings", {internships, currentPage: "job-listings"});
-});
+// app.get("/listing", async (req, res) => {
+//   const internships = await Internship.find();
+//   res.render("job-listings", {internships, currentPage: "job-listings"});
+// });
+
+app.get("/listing", InternshipController.searchInternships);
+
+app.get("/", InternshipController.searchInternships);
 
 app.get("/single", (req, res) => {
   res.render("job-single");
@@ -189,4 +194,3 @@ app.listen(PORT, () => {
 //       dropdownButton.textContent = selectedText;
 //   });
 // });
-

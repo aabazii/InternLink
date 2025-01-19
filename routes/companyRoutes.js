@@ -8,7 +8,7 @@ const router = express.Router();
 router.post("/company", (req, res) => companyController.createCompany(req, res));
 
 // Get a single company by ID
-router.get("/:id", (req, res) => companyController.getCompany(req, res));
+//router.get("/:id", (req, res) => companyController.getCompany(req, res));
 
 // Update a company by ID
 router.put("/:id", (req, res) => companyController.updateCompany(req, res));

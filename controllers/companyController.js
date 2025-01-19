@@ -67,7 +67,7 @@ class CompanyController {
         req.flash("error", "Company not found");
         return res.redirect("/login");
       }
-      res.render("dashboard", { company });
+      res.render("/dashboard", { company });
     } catch (err) {
       req.flash("error", err.message);
       res.redirect("/login");
@@ -75,4 +75,4 @@ class CompanyController {
   }
 }
 
-module.exports = CompanyController;
+module.exports = new CompanyController();
