@@ -37,6 +37,35 @@ class UserController {
   }
 
   // Update a user by ID
+  async updateUser(req, res) {
+    try {
+      const user = await User.findById(req.params.id);
+      if (!user) {
+        return res.status(404).json({ message: "Cannot find user" });
+      }
+
+      if (req.body.firstName != null) {
+        user.firstName = req.body.firstName;
+      }
+      if (req.body.lastName != null) {
+        user.lastName = req.body.lastName;
+      }
+      if (req.body.email != null) {
+        user.email = req.body.email;
+      }
+      if (req.body.dateOfBirth != null) {
+        user.dateOfBirth = req.body.dateOfBirth;
+      }
+      if (req.body.collegeName != null) {
+        user.collegeName = req.body.collegeName;
+      }
+
+      const updatedUser = await user.save();
+      res.redirect('/');
+    } catch (err) {
+      res.send(err);
+    }
+  }
 
   // Delete a user by ID
   async deleteUser(req, res) {

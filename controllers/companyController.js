@@ -38,13 +38,25 @@ class CompanyController {
 
   async updateCompany(req, res) {
     try {
-      const company = await Company.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      const company = await Company.findById(req.params.id);
       if (!company) {
-        return res.status(404).json({ error: "Company not found" });
+        return res.status(404).json({ message: "Cannot find Company" });
       }
-      res.status(200).json(company);
+
+      if (req.body.companyName != null) {
+        company.companyName = req.body.companyName;
+      }
+      if (req.body.location != null) {
+        company.lastName = req.body.lastName;
+      }
+      if (req.body.email != null) {
+        company.email = req.body.email;
+      }
+
+      const updatedCompany = await company.save();
+      res.redirect('/');
     } catch (err) {
-      res.status(400).json({ error: err.message });
+      res.send(err);
     }
   }
 
@@ -62,12 +74,12 @@ class CompanyController {
 
   async getCompanyDashboard(req, res) {
     try {
-      //const company = await Company.findById(req.session.company._id).populate('internships');
-      if (!req.session.company) {
+      const company = await Company.findById(req.session.company._id).populate('internshipsCreated');
+      if (!company) {
         req.flash("error", "Company not found");
         return res.redirect("/login");
       }
-      res.render("/dashboard", { company });
+      res.render("dashboard", { company });
     } catch (err) {
       req.flash("error", err.message);
       res.redirect("/login");

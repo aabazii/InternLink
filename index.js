@@ -9,7 +9,7 @@ const companyRoutes = require("./routes/companyRoutes");
 const authRoutes = require("./routes/authRoutes");
 const session = require("express-session");
 const multer = require("multer");
-const methodOverride = require('method-override');
+const methodOverride = require("method-override");
 
 //cookieParser
 const cookieParser = require("cookie-parser");
@@ -56,7 +56,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 // Serve static files from the "public" directory
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Database connection
 mongoose
@@ -89,13 +89,9 @@ app.get("/pages", (req, res) => {
   res.render("services", { currentPage: "pages" });
 });
 
-app.get("/services", (req, res) => {
-  res.render("services", { currentPage: "services" });
-});
 app.get("/apply", (req, res) => {
   res.render("apply", { currentPage: "apply" });
 });
-
 
 app.get("/single/:id", async (req, res) => {
   try {
@@ -108,7 +104,6 @@ app.get("/single/:id", async (req, res) => {
     res.status(500).send("Server error");
   }
 });
-
 
 app.get("/portfolio", (req, res) => {
   res.render("portfolio", { currentPage: "portfolio" });

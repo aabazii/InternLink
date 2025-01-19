@@ -60,11 +60,14 @@
                             </ul>
                         </li>
                         <li><a href="/contact">Contact</a></li>
-                        <% if (user || company) { %>
+                        <% if (user) { %>
                         <li><a href="/profile">Profile</a></li>
-
                         
                         <% } %>
+                        <% if (company) { %>
+                            <li><a href="/company/dashboard">Dashboard</a></li>
+      
+                            <% } %>
                         <li class="d-lg-none"><a href="/post"><span
                                     class="mr-2">+</span> Post Internship</a>
                         </li>
