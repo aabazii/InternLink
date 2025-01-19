@@ -142,7 +142,7 @@
                                                 <input class="form-check-input"
                                                     type="checkbox"
                                                     name="payment"
-                                                    id="pa"
+                                                    id="payment"
                                                     value="Paid">
                                                 <label class="form-check-label"
                                                     for="payment">Paid</label>
@@ -171,28 +171,28 @@
                     </form>
                     <script>
                         function handleSearch(event) {
-                            event.preventDefault();
-                            const searchText = document.getElementById(
-                                'searchText').value.trim();
-                            const city = document.querySelector(
-                                'input[name="city"]:checked')?.value || '';
-                            const jobTypes = Array.from(document
-                                .querySelectorAll(
-                                    'input[name="jobType"]:checked')).map(
-                                el => el.value).join(',');
-                            const payment = Array.from(document.querySelectorAll('input[name="jobType"]:checked')).some(el => el.value === 'Paid') ? 'Paid' : 'Not Paid';
-                            let url = '/listing';
-                            const params = new URLSearchParams();
-                            if (searchText) params.append('searchText', searchText);
-                            if (city) params.append('city', city);
-                            if (jobTypes) params.append('jobType', jobTypes);
-                            if (payment) params.append('payment', payment);
-                            if (params.toString()) {
-                                url += `?${params.toString()}`;
-                            }
-                            window.location.href = url;
+                          event.preventDefault();
+                          const searchText = document.getElementById('searchText').value.trim();
+                          const city = document.querySelector('input[name="city"]:checked')?.value || '';
+                          const jobTypes = Array.from(document.querySelectorAll('input[name="jobType"]:checked')).map(el => el.value).join(',');
+                      
+                          // Check if any payment option is selected
+                          const paymentOptions = Array.from(document.querySelectorAll('input[name="payment"]:checked'));
+                          const payment = paymentOptions.length > 0 ? paymentOptions[0].value : '';
+                      
+                          let url = '/internships/listing';
+                          const params = new URLSearchParams();
+                          if (searchText) params.append('searchText', searchText);
+                          if (city) params.append('city', city);
+                          if (jobTypes) params.append('jobType', jobTypes);
+                          if (payment) params.append('payment', payment);
+                      
+                          if (params.toString()) {
+                            url += `?${params.toString()}`;
+                          }
+                          window.location.href = url;
                         }
-                    </script>
+                      </script>
                 </div>
             </div>
         </div>

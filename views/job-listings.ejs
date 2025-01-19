@@ -31,11 +31,17 @@
                 <h2 class="section-title mb-2"><%= internships.length %> Internships Listed</h2>
               </div>
             </div>
+            <div class="row mb-5 justify-content-center">
+              <div class="col-md-7 text-center">
+                <button class="btn btn-secondary" onclick="sortInternships('asc')">Sort by Name (A-Z)</button>
+                <button class="btn btn-secondary" onclick="sortInternships('desc')">Sort by Name (Z-A)</button>
+              </div>
+            </div>
             <ul class="job-listings mb-5">
               <% internships.forEach(internship => { %>
                 <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
                   <div class="job-listing-logo">
-                    <img src="<%= internship.logo %>" alt="Company Logo" class="img-fluid">
+                    <img src="../<%= internship.company %>" alt="Company Logo" class="img-fluid">
                   </div>
                   <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
                     <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
@@ -65,8 +71,32 @@
                 </li>
               <% }) %>
             </ul>
+            <!-- Pagination controls -->
+              <div class="row pagination-wrap">
+                <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
+                  <span>Showing <%= (currentPage - 1) * 10 + 1 %>-<%= Math.min(currentPage * 10, totalInternships) %> of <%= totalInternships %> Internships</span>
+                </div>
+                <div class="col-md-6 text-center text-md-right">
+                  <div class="custom-pagination ml-auto">
+                    <% if (currentPage > 1) { %>
+                      <a href="?page=<%= currentPage - 1 %>" class="prev">Prev</a>
+                    <% } %>
+                    <div class="d-inline-block">
+                      <% for (let i = 1; i <= totalPages; i++) { %>
+                        <a href="?page=<%= i %>" class="<%= i === currentPage ? 'active' : '' %>"><%= i %></a>
+                      <% } %>
+                    </div>
+                    <% if (currentPage < totalPages) { %>
+                      <a href="?page=<%= currentPage + 1 %>" class="next">Next</a>
+                    <% } %>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
+        
+
         <section class="py-5 bg-image overlay-primary fixed overlay"
             style="background-image: url('images/hero_1.jpg');">
             <div class="container">
@@ -130,6 +160,13 @@
               </div>
           </div>
       </section>
+      <script>
+        function sortInternships(order) {
+          const urlParams = new URLSearchParams(window.location.search);
+          urlParams.set('sortBy', order);
+          window.location.search = urlParams.toString();
+        }
+      </script>
     </div> <!-- SCRIPTS -->
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>

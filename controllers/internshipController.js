@@ -80,7 +80,7 @@ class InternshipController {
       if (!internship) {
         return res.status(404).json({ error: "Internship not found" });
       }
-      res.status(200).json({ message: "Internship deleted successfully" });
+      res.redirect('/');
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
@@ -88,8 +88,11 @@ class InternshipController {
 
   async searchInternships(req, res) {
     try {
-      const { searchText, city, jobType, payment } = req.query;
+      const { searchText, city, jobType, payment, page = 1, sortBy } = req.query;
       const query = {};
+      const limit = 10;
+      const skip = (page - 1) * limit;
+      const sortOptions = {};
 
       if (searchText) {
         query.name = new RegExp(searchText, "i");
@@ -107,8 +110,15 @@ class InternshipController {
         query.payment = payment
       }
 
-      const internships = await Internship.find(query);
-      res.render("job-listings", { internships });
+      if (sortBy) {
+        sortOptions.name = sortBy === 'asc' ? 1 : -1;
+      }
+
+      const internships = await Internship.find(query).limit(limit).skip(skip);
+      const totalInternships = await Internship.countDocuments(query);
+      const totalPages = Math.ceil(totalInternships / limit);
+
+      res.render("job-listings", { internships, currentPage: page, totalPages, totalInternships });
     } catch (err) {
       res.status(500).json({ error: err.message });
     }

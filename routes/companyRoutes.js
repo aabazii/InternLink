@@ -1,6 +1,7 @@
 const express = require("express");
 const companyController = require("../controllers/companyController");
 const { guestRoute, protectedRoute } = require("../middlewares/authMiddleware");
+const Company = require("../models/Company");
 
 const router = express.Router();
 
@@ -16,7 +17,11 @@ router.put("/:id", (req, res) => companyController.updateCompany(req, res));
 // Delete a company by ID
 router.delete("/:id", (req, res) => companyController.deleteCompany(req, res));
 
-router.get("/dashboard", protectedRoute, (req, res) => companyController.getCompanyDashboard(req, res));
+//router.get("/dashboard", protectedRoute, (req, res) => companyController.getCompanyDashboard(req, res));
+
+router.get('/dashboard', protectedRoute, (req, res)=> 
+  res.render('dashboard', { title: 'Dash Board', Company})
+);
 
 
 module.exports = router;

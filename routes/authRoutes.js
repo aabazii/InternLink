@@ -27,6 +27,4 @@ router.get('/profile', protectedRoute, (req, res)=>
 
 
 
-
-
 module.exports = router;
