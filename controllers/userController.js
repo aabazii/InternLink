@@ -86,24 +86,29 @@ class UserController {
   async applyForInternship(req, res) {
     try {
       if (!req.session.user) {
-        return res.send("You need to Log In to Apply" );
+        return res.send("You need to Log In to Apply");
       }
-
+  
       const userId = req.session.user._id; // Assuming user is logged in and session contains user info
       const internshipId = req.params.id;
-
+  
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({ message: "Cannot find user" });
+      }
+  
       const internship = await Internship.findById(internshipId);
       if (!internship) {
         return res.status(404).json({ message: "Cannot find internship" });
       }
-
+  
       // Add the internship ID to the user's internshipsApplied property
       user.internshipsApplied.push(internshipId);
       await user.save();
-
+  
       return res.send(`
         <script>
-          alert("Applied for the Intership!");
+          alert("Applied for the Internship!");
           window.location.href = "/";
         </script>
       `);

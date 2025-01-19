@@ -108,12 +108,7 @@ class AuthController {
       req.flash("success", "Logged in successfully");
       res.redirect("/profile");
     } catch (error) {
-      res.send(`
-        <script>
-          alert("An error occurred: ${error.message}");
-          window.location.href = "/login";
-        </script>
-      `);
+      res.send(error);
     }
   }
 
