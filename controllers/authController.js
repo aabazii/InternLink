@@ -19,8 +19,12 @@ class AuthController {
       const userExists = await User.findOne({ email });
 
       if (userExists) {
-        req.flash("error", "User already exists with this email");
-        return res.redirect("/register");
+        return res.send(`
+          <script>
+            alert("User exists with this email!");
+            window.location.href = "/register";
+          </script>
+        `);
       }
 
       const user = new User({
@@ -49,8 +53,12 @@ class AuthController {
       const companyExists = await Company.findOne({ email });
 
       if (companyExists) {
-        req.flash("error", "Company already exists with this email");
-        return res.redirect("/register");
+        return res.send(`
+          <script>
+            alert("Company exists with this email!");
+            window.location.href = "/register";
+          </script>
+        `);
       }
 
       const company = new Company({
@@ -64,8 +72,12 @@ class AuthController {
       req.flash("success", "Company registered successfully");
       res.redirect("/login");
     } catch (error) {
-      req.flash("error", error.message);
-      res.redirect("/register");
+      return res.send(`
+        <script>
+          alert("Wrong email or password!");
+          window.location.href = "/login";
+        </script>
+      `);
     }
   }
 
@@ -75,16 +87,20 @@ class AuthController {
     try {
       const user = await User.findOne({ email });
 
-      if (!user) {
-        req.flash("error", "Invalid email or password");
-        return res.redirect("/login");
-      }
+      // if (!user) {
+      //   req.flash("error", "Invalid email or password");
+      //   return res.redirect("/login");
+      // }
 
       const isMatch = await bcrypt.compare(password, user.password);
 
-      if (!isMatch) {
-        req.flash("error", "Invalid email or password");
-        return res.redirect("/login");
+      if (!isMatch || !user) {
+        return res.send(`
+          <script>
+            alert("Wrong email or password!");
+            window.location.href = "/login";
+          </script>
+        `);
       }
 
       req.session.user = user;
@@ -92,8 +108,12 @@ class AuthController {
       req.flash("success", "Logged in successfully");
       res.redirect("/profile");
     } catch (error) {
-      req.flash("error", error.message);
-      res.redirect("/login");
+      res.send(`
+        <script>
+          alert("An error occurred: ${error.message}");
+          window.location.href = "/login";
+        </script>
+      `);
     }
   }
 
@@ -102,14 +122,22 @@ class AuthController {
       const company = await Company.findOne({ email: req.body.email });
       const isMatch = await bcrypt.compare(req.body.password, company.password);
       if (!company || !isMatch) {
-        req.flash("error", "Invalid email or password");
-        return res.redirect("/login");
+        return res.send(`
+          <script>
+            alert("Invalid email or password");
+            window.location.href = "/login";
+          </script>
+        `);
       }
       req.session.company = company; // Ensure this line sets the session data
       res.redirect("/");
     } catch (err) {
-      req.flash("error", err.message);
-      res.redirect("/login");
+      res.send(`
+        <script>
+          alert("An error occurred: ${err.message}");
+          window.location.href = "/login";
+        </script>
+      `);
     }
   }
 
@@ -119,7 +147,12 @@ class AuthController {
         return res.redirect("/");
       }
       res.clearCookie("connect.sid");
-      res.redirect("/login");
+      return res.send(`
+        <script>
+          alert("Loged out successfully");
+          window.location.href = "/";
+        </script>
+      `);
     });
   }
 }

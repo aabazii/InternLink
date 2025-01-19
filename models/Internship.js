@@ -2,14 +2,14 @@ const mongoose = require("mongoose");
 
 const internshipSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  details: { type: String, required: true },
-  experience: {type: String, required: true},
-  internType: { type: String, required: true },
-  type: { type: String, required: true },
-  payment: { type: String, required: true },
-  deadline: { type: Date, required: true },
-  location: { type: String, required: true },
-  logo: {type: String, required: true}
+  details: { type: String },
+  experience: { type: String },
+  internType: { type: String },
+  type: { type: String },
+  payment: { type: String },
+  deadline: { type: Date },
+  location: { type: String },
+  logo: { type: String },
 });
 
 const Internship = mongoose.model("Internship", internshipSchema);

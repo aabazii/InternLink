@@ -9,6 +9,7 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <link rel="shortcut icon" href="ftco-32x32.png">
+    <link rel="icon" href="/images/icon.ico" type="image/x-icon">
 
     <!-- MAIN CSS -->
 </head>
@@ -16,14 +17,47 @@
 <div class="site-wrap">
 
      <!-- .site-mobile-menu -->
-    <div class="site-wrap">
-        <div class="site-mobile-menu site-navbar-target">
-            <div class="site-mobile-menu-header">
-                <div class="site-mobile-menu-close mt-3"> <span
-                        class="icon-close2 js-menu-toggle"></span> </div>
+     <div class="site-mobile-menu site-navbar-target">
+        <div class="site-mobile-menu-header">
+            <div class="site-mobile-menu-close mt-3">
+                <span class="icon-close2 js-menu-toggle"></span>
             </div>
-            <div class="site-mobile-menu-body"></div>
-         </div>
+        </div>
+        <div></div>
+            <ul class="site-menu js-clone-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li class="has-children">
+                    <a href="/internships/listing">Internship Listings</a>
+                </li>
+                
+                    <li><a href="/services">Pages</a></li>
+                    <ul class="dropdown">
+                        <li><a href="/services">Services</a></li>
+                        <li><a href="/testimonials">Testimonials</a></li>
+                        <li><a href="/apply">Apply</a></li>
+                        <li><a href="/faq">Frequently Asked Questions</a></li>
+                    </ul>
+                </li>
+                <li><a href="/contact">Contact</a></li>
+                <% if (user || company) { %>
+                    <li><a href="/profile">Profile</a></li>
+                <% } %>
+                <% if (!user && !company) { %>
+                    <li><a href="/login">Log In</a></li>
+                <% } else { %>
+                    <li><a href="/logout">Log Out</a></li>
+                <% } %>
+                
+                <% if (company) { %>
+                 
+                    <li><a href="/internships/post"><span class="mr-2">+</span> Post Internship</a></li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+    
+    
 
     <!-- NAVBAR -->
     <header class="site-navbar mt-3">
@@ -36,15 +70,10 @@
                         class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
                         <li><a href="/">Home</a></li>
                         <li><a href="/about">About</a></li>
-                        <li class="has-children">
+                        <li >
                             <a href="/internships/listing">Internship
                                 Listings</a>
-                            <ul class="dropdown">
-                                <li><a href="/single">Internship
-                                        Single</a></li>
-                                <li><a href="/post">Post Internship</a>
-                                </li>
-                            </ul>
+                            
                         </li>
                         <li class="has-children">
                             <a href="/services">Pages</a>
@@ -53,8 +82,7 @@
                                 </li>
                                 <li><a href="/testimonials">Testimonials</a>
                                 </li>
-                                <li><a href="/apply">Apply</a>
-                                </li>
+                                
                                 <li><a href="/faq">Frequently Ask
                                         Questions</a></li>
                             </ul>
@@ -62,11 +90,12 @@
                         <li><a href="/contact">Contact</a></li>
                         <% if (user) { %>
                         <li><a href="/profile">Profile</a></li>
-                        
+
                         <% } %>
+
                         <% if (company) { %>
                             <li><a href="/company/dashboard">Dashboard</a></li>
-      
+
                             <% } %>
                         <li class="d-lg-none"><a href="/post"><span
                                     class="mr-2">+</span> Post Internship</a>

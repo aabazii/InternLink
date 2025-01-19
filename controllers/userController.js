@@ -101,7 +101,12 @@ class UserController {
       user.internshipsApplied.push(internshipId);
       await user.save();
 
-      res.status(200).json({ message: "Applied for internship successfully" });
+      return res.send(`
+        <script>
+          alert("Applied for the Intership!");
+          window.location.href = "/";
+        </script>
+      `);
     } catch (err) {
       res.status(500).json({ message: err.message });
     }

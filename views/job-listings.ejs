@@ -48,10 +48,13 @@
                       <h2><a href="/internships/single/<%= internship._id %>"><%= internship.name %></a></h2>
                       <strong><%= internship.company %></strong>
                     </div>
-                    <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
+                    <div class="job-listing-location mb-1 mb-sm-0 custom-width w-20">
                       <span class="icon-money"></span> <%= internship.payment %>
                     </div>
-                    <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
+                    <div class="job-listing-location  mb-sm-0 custom-width w-20 ">
+                      <span class="icon-briefcase"></span> <%= internship.type %>
+                    </div>
+                    <div class="job-listing-location mb-3 mb-sm-0 custom-width w-20">
                       <span class="icon-room"></span> <%= internship.location %>
                     </div>
 
@@ -79,7 +82,7 @@
                 <div class="col-md-6 text-center text-md-right">
                   <div class="custom-pagination ml-auto">
                     <% if (currentPage > 1) { %>
-                      <a href="?page=<%= Number(currentPage) - 1 %>" class="prev">Prev</a>
+                      <a href="?page=<%= currentPage - 1 %>" class="prev">Prev</a>
                     <% } %>
                     <div class="d-inline-block">
                       <% for (let i = 1; i <= totalPages; i++) { %>
@@ -87,7 +90,7 @@
                       <% } %>
                     </div>
                     <% if (currentPage < totalPages) { %>
-                      <a href="?page=<%= Number(currentPage) + 1 %>" class="next">Next</a>
+                      <a href="?page=<%= currentPage + 1 %>" class="next">Next</a>
                     <% } %>
                   </div>
                 </div>
@@ -103,12 +106,9 @@
                 <div class="row align-items-center">
                     <div class="col-md-8">
                         <h2 class="text-white">Looking For A Internship?</h2>
-                        <p class="mb-0 text-white lead">Lorem ipsum dolor sit
-                            amet consectetur adipisicing elit tempora adipisci
-                            impedit.</p>
+                        <p class="mb-0 text-white lead">Then look no further.</p>
                     </div>
-                    <div class="col-md-3 ml-auto"> <a href="/register"
-                            class="btn btn-warning btn-block btn-lg">Sign Up</a>
+                    <div class="col-md-3 ml-auto"> <a class="btn btn-warning btn-block btn-lg" href="/register">Sign Up</a>
                     </div>
                 </div>
             </div>

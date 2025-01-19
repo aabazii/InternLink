@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
-const flash = require("connect-flash");
 const userRoutes = require("./routes/userRoutes");
 const internshipRoutes = require("./routes/internshipRoutes");
 const companyRoutes = require("./routes/companyRoutes");
@@ -25,20 +24,6 @@ app.use(cookieParser());
 app.use(
   session({ secret: "my secret key", saveUninitialized: true, resave: false })
 );
-
-//Flash messages
-app.use(flash());
-app.use((req, res, next) => {
-  res.locals.message = req.session.message;
-  delete req.session.message;
-  next();
-});
-
-app.use((req, res, next) => {
-  res.locals.success = req.flash("success");
-  res.locals.error = req.flash("error");
-  next();
-});
 
 //store authenticated user's session data for views
 app.use(function (req, res, next) {
@@ -89,9 +74,6 @@ app.get("/pages", (req, res) => {
   res.render("services", { currentPage: "pages" });
 });
 
-app.get("/apply", (req, res) => {
-  res.render("apply", { currentPage: "apply" });
-});
 
 app.get("/single/:id", async (req, res) => {
   try {

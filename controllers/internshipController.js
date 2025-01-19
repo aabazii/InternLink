@@ -2,6 +2,7 @@ const Internship = require("../models/Internship");
 const multer = require("multer");
 const path = require("path");
 const Company = require('../models/Company');
+const sharp = require("sharp");
 
 
 // Set up multer for file uploads
@@ -17,13 +18,6 @@ const upload = multer({ storage: storage });
 class InternshipController {
   async createInternship(req, res) {
     try {
-      let logoFilename = null;
-      if (req.file) {
-        logoFilename = req.file.originalname;
-        await sharp(req.file.buffer)
-          .resize(300, 300) // Resize to 300x300 pixels
-          .toFile(path.join(__dirname, '../public/uploads/', logoFilename));
-      }
 
       const internship = new Internship({
         ...req.body,
@@ -37,7 +31,12 @@ class InternshipController {
         await company.save();
       }
 
-      res.redirect('/internships/post');
+      return res.send(`
+        <script>
+          alert("Internship was created successfully!");
+          window.location.href = "/internships/listing";
+        </script>
+      `);
     } catch (err) {
       res.status(400).json({ error: err.message });
     }
@@ -86,7 +85,12 @@ class InternshipController {
       if (!internship) {
         return res.status(404).json({ error: "Internship not found" });
       }
-      res.redirect('/');
+      return res.send(`
+        <script>
+          alert("Internship was deleted successfully!");
+          window.location.href = "/";
+        </script>
+      `);
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
