@@ -54,6 +54,8 @@ class CompanyController {
       }
 
       const updatedCompany = await company.save();
+      req.session.company = updatedCompany; // Update session data
+
       res.redirect('/logout');
     } catch (err) {
       res.send(err);

@@ -67,7 +67,6 @@ class AuthController {
       });
 
       await company.save();
-      req.flash("success", "Company registered successfully");
       res.redirect("/login");
     } catch (error) {
       return res.send(`

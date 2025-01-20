@@ -6,7 +6,7 @@ const { protectedRoute , guestRoute} = require("../middlewares/authMiddleware");
 const router = express.Router();
 
 // Create a new internship with file upload
-router.post("/", upload.single("logo"), (req, res) => InternshipController.createInternship(req, res));
+router.post("/create/", upload.single("logo"), (req, res) => InternshipController.createInternship(req, res));
 
 // Get all internships
 router.get("/", (req, res) => InternshipController.getAllInternships(req, res));

@@ -61,6 +61,7 @@ class UserController {
       }
 
       const updatedUser = await user.save();
+      req.session.user = updatedUser
       res.redirect('/');
     } catch (err) {
       res.send(err);

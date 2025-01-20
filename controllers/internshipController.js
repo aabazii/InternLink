@@ -30,6 +30,7 @@ class InternshipController {
         company.internshipsCreated.push(internship._id);
         await company.save();
       }
+      
 
       return res.send(`
         <script>
@@ -128,10 +129,15 @@ class InternshipController {
       const totalInternships = await Internship.countDocuments(query);
       const totalPages = Math.ceil(totalInternships / limit);
 
-      res.render("job-listings", { internships, currentPage: page, totalPages, totalInternships });
+      const queryString = Object.keys(req.query)
+        .filter(key => key !== 'page')
+        .map(key => `${key}=${req.query[key]}`)
+        .join('&');
+
+      res.render("job-listings", { internships, currentPage: page, totalPages, totalInternships, queryString });
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
   }
 }
-module.exports = { InternshipController: new InternshipController(), upload };
+module.exports = { InternshipController: new InternshipController(), upload,  };

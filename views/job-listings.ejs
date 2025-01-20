@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/fonts/line-icons/style.css">
     <link rel="stylesheet" href="/css/owl.carousel.min.css">
     <link rel="stylesheet" href="/css/animate.min.css">
-    <link rel="stylesheet" href="/css/quill.snow.css"> <!-- MAIN CSS -->
+    <link rel="stylesheet" href="/css/quill.snow.css"> 
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <%- include("./partials/nav.ejs") %>
@@ -82,15 +82,16 @@
                 <div class="col-md-6 text-center text-md-right">
                   <div class="custom-pagination ml-auto">
                     <% if (currentPage > 1) { %>
-                      <a href="?page=<%= currentPage - 1 %>" class="prev">Prev</a>
+                      <a href="?page=<%= currentPage - 1 %>&<%= queryString %>" class="prev">Prev</a>
+                    
                     <% } %>
                     <div class="d-inline-block">
                       <% for (let i = 1; i <= totalPages; i++) { %>
-                        <a href="?page=<%= i %>" class="<%= i === currentPage ? 'active' : '' %>"><%= i %></a>
+                        <a href="?page=<%= i %>&<%= queryString %>" class="<%= i === currentPage ? 'active' : '' %>"><%= i %></a>
                       <% } %>
                     </div>
                     <% if (currentPage < totalPages) { %>
-                      <a href="?page=<%= currentPage + 1 %>" class="next">Next</a>
+                      <a href="?page=<%= currentPage + 1 %>&<%= queryString %>" class="next">Next</a>
                     <% } %>
                   </div>
                 </div>
