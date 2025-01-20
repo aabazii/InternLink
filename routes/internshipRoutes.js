@@ -1,7 +1,7 @@
 const express = require("express");
 const { InternshipController, upload } = require("../controllers/internshipController");
 const Internship = require("../models/Internship");
-const { protectedRoute } = require("../middlewares/authMiddleware");
+const { protectedRoute , guestRoute} = require("../middlewares/authMiddleware");
 
 const router = express.Router();
 
@@ -38,6 +38,7 @@ router.get("/single/:id", async (req,res) =>{
 router.get("/listing", InternshipController.searchInternships);
 
 router.get('/post', protectedRoute, (req,res) => res.render('post-job' ));
+
 
 
 module.exports = router;

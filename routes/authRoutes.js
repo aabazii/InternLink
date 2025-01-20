@@ -2,6 +2,7 @@ const { guestRoute, protectedRoute } = require('../middlewares/authMiddleware.js
 const express = require("express");
 const authController = require("../controllers/authController");
 const User = require('../models/User.js');
+const userController = require('../controllers/userController');
 
 const router = express.Router();
 
@@ -21,9 +22,7 @@ router.post("/login/company", (req, res) => authController.loginCompany(req, res
 
 router.get("/logout", (req, res) => authController.logout(req, res));
 
-router.get('/profile', protectedRoute, (req, res)=> 
-  res.render('profile', { title: 'Profile Page', User})
-);
+router.get('/profile', protectedRoute, (req, res)=> userController.getUserProfile(req,res));
 
 
 

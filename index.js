@@ -99,17 +99,10 @@ app.get("/testimonials", (req, res) => {
 app.get("/contact", (req, res) => {
   res.render("contact", { currentPage: "contact" });
 });
-// Render the form to add a new internship
-// app.get("/post", protectedRoute, function(req, res) {
-//   res.render("post-job", { currentPage: "post" });
-// });
 
-// app.get("/listing", async (req, res) => {
-//   const internships = await Internship.find();
-//   res.render("job-listings", {internships, currentPage: "job-listings"});
-// });
 
 //app.get("/listing", InternshipController.searchInternships);
+
 
 app.get("/", InternshipController.searchInternships);
 

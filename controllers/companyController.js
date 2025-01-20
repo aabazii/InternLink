@@ -76,12 +76,10 @@ class CompanyController {
     try {
       const company = await Company.findById(req.session.company._id).populate('internshipsCreated');
       if (!company) {
-        req.flash("error", "Company not found");
         return res.redirect("/login");
       }
       res.render("dashboard", { company });
-    } catch (err) {
-      req.flash("error", err.message);
+    } catch (err) {   
       res.redirect("/login");
     }
   }

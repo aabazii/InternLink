@@ -86,7 +86,12 @@ class UserController {
   async applyForInternship(req, res) {
     try {
       if (!req.session.user) {
-        return res.send("You need to Log In to Apply");
+        return res.send(`
+          <script>
+            alert("You need to login to apply!");
+            window.location.href = "/login";
+          </script>
+        `);
       }
   
       const userId = req.session.user._id; // Assuming user is logged in and session contains user info
@@ -109,9 +114,21 @@ class UserController {
       return res.send(`
         <script>
           alert("Applied for the Internship!");
-          window.location.href = "/";
+          window.location.href = "/internships/listing";
         </script>
       `);
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  }
+
+  async getUserProfile(req, res) {
+    try {
+      const user = await User.findById(req.session.user._id).populate('internshipsApplied');
+      if (!user) {
+        return res.status(404).json({ message: "Cannot find user" });
+      }
+      res.render('profile', { user });
     } catch (err) {
       res.status(500).json({ message: err.message });
     }

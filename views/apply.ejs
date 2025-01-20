@@ -29,7 +29,7 @@
     <div class="site-wrap">
 
         <!-- HOME -->
-        <section class="section-hero overlay inner-page bg-image" style="background-image: url('images/hero_1.jpg');" id="home-section">
+        <section class="section-hero overlay inner-page bg-image" style="background-image: url('images/backi.webp');" id="home-section">
             <div class="container">
                 <div class="row">
                     <div class="col-md-7">
@@ -47,34 +47,32 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 mb-5 mb-lg-0">
-                        <form action="/apply" method="POST" enctype="multipart/form-data">
-                            <div class="row form-group">
-                                <div class="col-md-12 mb-3 mb-md-0">
-                                    <label class="text-black" for="name">Name</label>
-                                    <input type="text" id="name" name="name" class="form-control" required>
-                                </div>
-                            </div>
-
-                            <div class="row form-group">
-                                <div class="col-md-12">
-                                    <label class="text-black" for="email">Email</label> 
-                                    <input type="email" id="email" name="email" class="form-control" required>
-                                </div>
-                            </div>
-
+                        <form action="/users/apply/<%= internship._id%>" method="POST" enctype="multipart/form-data">
+                            
                             <div class="row form-group">
                                 <div class="col-md-12">
                                     <label class="text-black" for="resume">Resume</label> 
                                     <input type="file" id="resume" name="resume" class="form-control" required>
                                 </div>
                             </div>
+                            <div class="row form-group">
+                                <div class="col-md-12">
+                                    <label class="text-black" for="cover-letter">Cover Letter</label> 
+                                    <input type="file" id="cover-letter" name="cover_letter" class="form-control" required>
+                                </div>
+                            </div>
 
                             <div class="row form-group">
                                 <div class="col-md-12">
-                                    <input type="submit" value="Submit Application" class="btn btn-primary btn-md text-white">
+                                    <button type="submit" value="Submit Application" class="btn btn-primary btn-md text-white">Apply</button>
                                 </div>
                             </div>
                         </form>
+                        <% if (typeof successMessage !== 'undefined') { %>
+                            <div class="alert alert-success">
+                                <%= successMessage %>
+                            </div>
+                        <% } %>
                     </div>
                 </div>
             </div>

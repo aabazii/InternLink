@@ -43,9 +43,8 @@ const userSchema = new mongoose.Schema({
     type: Date,
     required: [true, "Please enter your date of birth."],
   },
-  logo: {type: String},
-
-  internshipsApplied: [{ type: mongoose.Schema.Types.ObjectId, ref: "Internship" }]
+  
+    internshipsApplied: [{ type: mongoose.Schema.Types.ObjectId, ref: "Internship" }]
 
 });
 

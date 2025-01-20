@@ -38,10 +38,8 @@ class AuthController {
       });
 
       await user.save();
-      req.flash("success", "User registered successfully");
       res.redirect("/login");
     } catch (error) {
-      req.flash("error", error.message);
       res.redirect("/register");
     }
   }
@@ -86,12 +84,6 @@ class AuthController {
 
     try {
       const user = await User.findOne({ email });
-
-      // if (!user) {
-      //   req.flash("error", "Invalid email or password");
-      //   return res.redirect("/login");
-      // }
-
       const isMatch = await bcrypt.compare(password, user.password);
 
       if (!isMatch || !user) {
@@ -103,9 +95,7 @@ class AuthController {
         `);
       }
 
-      req.session.user = user;
-      alert("Successfully loged in");
-      req.flash("success", "Logged in successfully");
+      req.session.user = user;     
       res.redirect("/profile");
     } catch (error) {
       res.send(error);
